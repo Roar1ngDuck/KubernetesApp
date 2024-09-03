@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dwk-pingpongapp-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dwk-pingpongapp
+  template:
+    metadata:
+      labels:
+        app: dwk-pingpongapp
+    spec:
+      containers:
+        - name: dwk-pingpongapp
+          image: roaringduck/dwk-pingpongapp
