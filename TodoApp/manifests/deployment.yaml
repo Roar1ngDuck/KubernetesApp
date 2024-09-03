@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dwk-todoapp-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dwk-todoapp
+  template:
+    metadata:
+      labels:
+        app: dwk-todoapp
+    spec:
+      containers:
+        - name: dwk-todoapp
+          image: roaringduck/dwk-todoapp

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWKApp1", "DWKApp1\DWKApp1.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogOutput", "LogOutput\LogOutput.csproj", "{9AE16DF0-4882-4A7A-9785-7AAD33023678}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp", "TodoApp\TodoApp.csproj", "{87004E5C-792C-4898-8278-215F0C301224}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{9AE16DF0-4882-4A7A-9785-7AAD33023678}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AE16DF0-4882-4A7A-9785-7AAD33023678}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AE16DF0-4882-4A7A-9785-7AAD33023678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87004E5C-792C-4898-8278-215F0C301224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87004E5C-792C-4898-8278-215F0C301224}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87004E5C-792C-4898-8278-215F0C301224}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87004E5C-792C-4898-8278-215F0C301224}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
