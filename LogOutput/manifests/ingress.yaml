@@ -6,10 +6,10 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /api/status
         pathType: Prefix
         backend:
           service:
             name: dwk-logoutput-svc
             port:
-              number: 10000
+              number: 10001
