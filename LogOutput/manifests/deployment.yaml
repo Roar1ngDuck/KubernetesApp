@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: dwk-logoutput
-          image: roar1ngduck/dwk-logoutput
+          image: roaringduck/dwk-logoutput
