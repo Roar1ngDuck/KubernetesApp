@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWKApp1", "DWKApp1\DWKApp1.csproj", "{9F0B7525-EC5D-44B0-9C9C-BAB6E1DC957B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogOutput", "LogOutput\LogOutput.csproj", "{9AE16DF0-4882-4A7A-9785-7AAD33023678}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp", "TodoApp\TodoApp.csproj", "{87004E5C-792C-4898-8278-215F0C301224}"
