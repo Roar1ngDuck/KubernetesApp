@@ -11,7 +11,7 @@ int portNumber;
 var port = Environment.GetEnvironmentVariable("PORT");
 if (!int.TryParse(port, out portNumber))
 {
-    portNumber = 8080;
+    portNumber = 9000;
 }
 
 builder.WebHost.UseKestrel(options =>
