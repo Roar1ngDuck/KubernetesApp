@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dwk-logoutput-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dwk-logoutput
+  template:
+    metadata:
+      labels:
+        app: dwk-logoutput
+    spec:
+      containers:
+        - name: dwk-logoutput
+          image: roar1ngduck/dwk-logoutput
