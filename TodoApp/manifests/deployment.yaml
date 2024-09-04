@@ -12,6 +12,13 @@ spec:
       labels:
         app: dwk-todoapp
     spec:
+      volumes:
+        - name: todoapp-volume
+          persistentVolumeClaim:
+            claimName: todoapp-volume-claim
       containers:
         - name: dwk-todoapp
           image: roaringduck/dwk-todoapp
+          volumeMounts:
+          - name: todoapp-volume
+            mountPath: /usr/src/app/files
