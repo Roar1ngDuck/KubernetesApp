@@ -1,5 +1,3 @@
-using System.Globalization;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.AddFilter("Microsoft.Hosting.Lifetime", LogLevel.Error);
@@ -20,23 +18,11 @@ builder.WebHost.UseKestrel(options =>
 
 var app = builder.Build();
 
-var randomString = Guid.NewGuid().ToString();
-
-_ = Task.Run(() => 
-{
-   while (true) 
-   {
-        Thread.Sleep(5000);
-        var timestamp = DateTime.Now.ToString("u", CultureInfo.InvariantCulture);
-        Console.WriteLine($"{timestamp}: {randomString}");
-   }
-});
-
 app.MapGet("/api/status", () => 
 {
-    var timestamp = DateTime.Now.ToString("u", CultureInfo.InvariantCulture);
+    var text = File.ReadAllText("/usr/src/app/files/logoutput.txt");
 
-    return Results.Text($"{timestamp}: {randomString}");
+    return Results.Text(text);
 });
 
 app.Run();

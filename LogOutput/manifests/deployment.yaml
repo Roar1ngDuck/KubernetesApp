@@ -12,6 +12,17 @@ spec:
       labels:
         app: dwk-logoutput
     spec:
+      volumes:
+        - name: shared-logoutput
+          emptyDir: {}
       containers:
-        - name: dwk-logoutput
-          image: roaringduck/dwk-logoutput
+        - name: dwk-logoutput-writer
+          image: roaringduck/dwk-logoutput-writer
+          volumeMounts:
+          - name: shared-logoutput
+            mountPath: /usr/src/app/files
+        - name: dwk-logoutput-reader
+          image: roaringduck/dwk-logoutput-reader
+          volumeMounts:
+          - name: shared-logoutput
+            mountPath: /usr/src/app/files
