@@ -21,7 +21,9 @@ var app = builder.Build();
 var counter = 0;
 app.MapGet("/pingpong", () => 
 {
-    return Results.Text($"pong {counter++}");
+    counter++;
+    File.WriteAllText("/usr/src/app/files/pingpong.txt", $"{counter}");
+    return Results.Text($"pong {counter}");
 });
 
 app.Run();

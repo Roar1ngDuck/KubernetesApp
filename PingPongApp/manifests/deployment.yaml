@@ -12,6 +12,13 @@ spec:
       labels:
         app: dwk-pingpongapp
     spec:
+      volumes:
+        - name: shared-logoutput
+          persistentVolumeClaim:
+            claimName: logoutput-volume-claim
       containers:
         - name: dwk-pingpongapp
           image: roaringduck/dwk-pingpongapp
+          volumeMounts:
+          - name: shared-logoutput
+            mountPath: /usr/src/app/files
