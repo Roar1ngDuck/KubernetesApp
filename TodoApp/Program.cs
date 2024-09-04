@@ -1,4 +1,3 @@
-using System.Reflection.Metadata.Ecma335;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);

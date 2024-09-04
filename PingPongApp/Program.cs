@@ -1,6 +1,3 @@
-using System.Reflection.Metadata.Ecma335;
-using Microsoft.Extensions.FileProviders;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.AddFilter("Microsoft.Hosting.Lifetime", LogLevel.Error);
