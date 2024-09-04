@@ -14,7 +14,8 @@ spec:
     spec:
       volumes:
         - name: shared-logoutput
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: logoutput-volume-claim
       containers:
         - name: dwk-logoutput-writer
           image: roaringduck/dwk-logoutput-writer
