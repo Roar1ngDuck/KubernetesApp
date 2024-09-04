@@ -20,9 +20,10 @@ var app = builder.Build();
 
 app.MapGet("/api/status", () => 
 {
-    var text = File.ReadAllText("/usr/src/app/files/logoutput.txt");
+    var logtext = File.ReadAllText("/usr/src/app/files/logoutput.txt");
+    var pingpongCount = File.ReadAllText("/usr/src/app/files/pingpong.txt");
 
-    return Results.Text(text);
+    return Results.Text($"{logtext}\r\nPing / Pongs: {pingpongCount}");
 });
 
 app.Run();
