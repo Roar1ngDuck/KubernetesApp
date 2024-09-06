@@ -12,10 +12,10 @@ spec:
       labels:
         app: dwk-logoutput
     spec:
+    spec:
       volumes:
         - name: shared-logoutput
-          persistentVolumeClaim:
-            claimName: logoutput-volume-claim
+          emptyDir: {}
       containers:
         - name: dwk-logoutput-writer
           image: roaringduck/dwk-logoutput-writer
