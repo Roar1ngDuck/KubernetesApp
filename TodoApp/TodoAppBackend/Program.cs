@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.AddFilter("Microsoft.Hosting.Lifetime", LogLevel.Error);
@@ -19,12 +17,6 @@ builder.WebHost.UseKestrel(options =>
 });
 
 var app = builder.Build();
-
-app.Use((context, next) =>
-{
-    
-    return next();
-});
 
 var todos = new List<string>();
 
