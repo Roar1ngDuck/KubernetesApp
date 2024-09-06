@@ -1,4 +1,5 @@
 bin
 obj
 .vscode
-DWKApp1.sln
+*.sln
+*.code-workspace
