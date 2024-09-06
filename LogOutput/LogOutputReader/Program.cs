@@ -21,9 +21,17 @@ var app = builder.Build();
 app.MapGet("/api/status", () => 
 {
     var logtext = File.ReadAllText("/usr/src/app/files/logoutput.txt");
-    var pingpongCount = File.ReadAllText("/usr/src/app/files/pingpong.txt");
+    var pingpongCount = GetPingPongCount();
 
     return Results.Text($"{logtext}\r\nPing / Pongs: {pingpongCount}");
 });
+
+int GetPingPongCount()
+{
+    var client = new HttpClient();
+    var response = client.GetAsync("http://dwk-pingpongapp-svc:10002/pingpongcount").Result;
+    var responseString = response.Content.ReadAsStringAsync().Result;
+    return int.Parse(responseString);
+}
 
 app.Run();

@@ -26,4 +26,9 @@ app.MapGet("/pingpong", () =>
     return Results.Text($"pong {counter}");
 });
 
+app.MapGet("/pingpongcount", () => 
+{
+    return Results.Text($"{counter}");
+});
+
 app.Run();
