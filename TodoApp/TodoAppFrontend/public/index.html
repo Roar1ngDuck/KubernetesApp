@@ -3,6 +3,7 @@
 <head>
     <title>TodoApp</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -13,7 +14,7 @@
         <section class="todo-section">
             <img src="randomimage" alt="Random Image" class="main-image">
 
-            <form action="" method="POST" class="todo-form">
+            <form action="/todos" method="POST" class="todo-form">
                 <div class="todo-input">
                     <input type="text" id="todo-input" name="todo" placeholder="Enter todo" maxlength="140" required>
                     <button type="submit">Add Todo</button>
@@ -21,9 +22,6 @@
             </form>
 
             <ul id="todo-list">
-                <li>Todo 1</li>
-                <li>Todo 2</li>
-                <li>Todo 3</li>
             </ul>
         </section>
     </div>
