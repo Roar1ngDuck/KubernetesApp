@@ -22,8 +22,10 @@ app.MapGet("/api/status", () =>
 {
     var logtext = File.ReadAllText("/usr/src/app/files/logoutput.txt");
     var pingpongCount = GetPingPongCount();
+    var configInfoText = File.ReadAllText(@"/usr/src/app/config/information.txt");
+    var message = Environment.GetEnvironmentVariable("MESSAGE");
 
-    return Results.Text($"{logtext}\r\nPing / Pongs: {pingpongCount}");
+    return Results.Text($"file content: {configInfoText}env variable: MESSAGE={message}\r\n{logtext}\r\nPing / Pongs: {pingpongCount}");
 });
 
 int GetPingPongCount()

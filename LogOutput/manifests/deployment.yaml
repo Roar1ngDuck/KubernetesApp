@@ -17,14 +17,27 @@ spec:
       volumes:
         - name: shared-logoutput
           emptyDir: {}
+        - name: log-config
+          configMap:
+            name: log-config
       containers:
         - name: dwk-logoutput-writer
           image: roaringduck/dwk-logoutput-writer
           volumeMounts:
           - name: shared-logoutput
             mountPath: /usr/src/app/files
+          - name: log-config
+            mountPath: /usr/src/app/config
         - name: dwk-logoutput-reader
           image: roaringduck/dwk-logoutput-reader
           volumeMounts:
           - name: shared-logoutput
             mountPath: /usr/src/app/files
+          - name: log-config
+            mountPath: /usr/src/app/config
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-config
+                  key: MESSAGE
