@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  namespace: todo-namespace
   name: todoapp-volume
 spec:
   storageClassName: todoapp-volume
