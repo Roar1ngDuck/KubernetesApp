@@ -28,3 +28,19 @@ spec:
           volumeMounts:
           - name: todoapp-volume
             mountPath: /usr/src/app/files
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-todo-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: POSTGRES_HOST
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: POSTGRES_USER

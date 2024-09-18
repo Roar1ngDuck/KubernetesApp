@@ -13,6 +13,7 @@ spec:
       labels:
         app: dwk-logoutput
     spec:
+    spec:
       volumes:
         - name: shared-logoutput
           emptyDir: {}

@@ -18,18 +18,27 @@ builder.WebHost.UseKestrel(options =>
 
 var app = builder.Build();
 
-var todos = new List<string>();
+var postgresHost = Environment.GetEnvironmentVariable("POSTGRES_HOST");
+var postgresUser = Environment.GetEnvironmentVariable("POSTGRES_USER");
+var postgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+string masterConnectionString = $"Host={postgresHost};Username={postgresUser};Password={postgresPassword};Database=postgres";
+string connectionString = $"Host={postgresHost};Username={postgresUser};Password={postgresPassword};Database=todosdb";
 
-app.MapGet("/todos", () => 
+DatabaseHelper.EnsureDatabaseExists(masterConnectionString, "todosdb");
+
+DatabaseHelper.InitializeDatabase(connectionString);
+
+app.MapGet("/todos", () =>
 {
+    var todos = DatabaseHelper.GetTodos(connectionString);
     return Results.Ok(todos);
 });
 
-app.MapPost("/todos", async (HttpContext httpContext) => 
+app.MapPost("/todos", async (HttpContext httpContext) =>
 {
     var form = await httpContext.Request.ReadFormAsync();
     var todo = form["todo"].ToString();
-    todos.Add(todo);
+    DatabaseHelper.AddTodo(connectionString, todo);
     return Results.Redirect("/");
 });
 

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: todo-namespace
+  name: todoapp-config
+data:
+  POSTGRES_HOST: "postgres-todo-svc"
+  POSTGRES_USER: "postgres"
