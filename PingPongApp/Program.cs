@@ -3,13 +3,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.AddFilter("Microsoft.Hosting.Lifetime", LogLevel.Error);
 builder.Logging.AddFilter("Microsoft.AspNetCore.Server.Kestrel", LogLevel.Error);
 
-int portNumber;
-
 var port = Environment.GetEnvironmentVariable("PORT");
-if (!int.TryParse(port, out portNumber))
-{
-    portNumber = 9002;
-}
+int portNumber = int.TryParse(port, out var parsedPort) ? parsedPort : 9002;
 
 builder.WebHost.UseKestrel(options =>
 {
@@ -18,17 +13,24 @@ builder.WebHost.UseKestrel(options =>
 
 var app = builder.Build();
 
-var counter = 0;
-app.MapGet("/pingpong", () => 
+var postgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+string masterConnectionString = $"Host=postgres-pingpong-svc;Username=postgres;Password={postgresPassword};Database=postgres";
+string connectionString = $"Host=postgres-pingpong-svc;Username=postgres;Password={postgresPassword};Database=pingpongdb";
+
+DatabaseHelper.EnsureDatabaseExists(masterConnectionString, "pingpongdb");
+
+DatabaseHelper.InitializeDatabase(connectionString);
+
+app.MapGet("/pingpong", () =>
 {
-    counter++;
-    File.WriteAllText("/usr/src/app/files/pingpong.txt", $"{counter}");
-    return Results.Text($"pong {counter}");
+    int newCount = DatabaseHelper.IncrementPingPongCount(connectionString);
+    return Results.Text($"pong {newCount}");
 });
 
-app.MapGet("/pingpongcount", () => 
+app.MapGet("/pingpongcount", () =>
 {
-    return Results.Text($"{counter}");
+    int currentCount = DatabaseHelper.GetPingPongCount(connectionString);
+    return Results.Text($"{currentCount}");
 });
 
 app.Run();
