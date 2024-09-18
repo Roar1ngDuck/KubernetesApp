@@ -28,3 +28,13 @@ spec:
                 secretKeyRef:
                   name: postgres-pingpong-secret
                   key: POSTGRES_PASSWORD
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpongapp-config
+                  key: POSTGRES_HOST
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpongapp-config
+                  key: POSTGRES_USER

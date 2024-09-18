@@ -13,9 +13,11 @@ builder.WebHost.UseKestrel(options =>
 
 var app = builder.Build();
 
+var postgresHost = Environment.GetEnvironmentVariable("POSTGRES_HOST");
+var postgresUser = Environment.GetEnvironmentVariable("POSTGRES_USER");
 var postgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
-string masterConnectionString = $"Host=postgres-pingpong-svc;Username=postgres;Password={postgresPassword};Database=postgres";
-string connectionString = $"Host=postgres-pingpong-svc;Username=postgres;Password={postgresPassword};Database=pingpongdb";
+string masterConnectionString = $"Host={postgresHost};Username={postgresUser};Password={postgresPassword};Database=postgres";
+string connectionString = $"Host={postgresHost};Username={postgresUser};Password={postgresPassword};Database=pingpongdb";
 
 DatabaseHelper.EnsureDatabaseExists(masterConnectionString, "pingpongdb");
 
