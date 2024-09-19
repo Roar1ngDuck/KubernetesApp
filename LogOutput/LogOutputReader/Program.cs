@@ -1,8 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Logging.AddFilter("Microsoft.Hosting.Lifetime", LogLevel.Error);
-builder.Logging.AddFilter("Microsoft.AspNetCore.Server.Kestrel", LogLevel.Error);
-
 int portNumber;
 
 var port = Environment.GetEnvironmentVariable("PORT");
