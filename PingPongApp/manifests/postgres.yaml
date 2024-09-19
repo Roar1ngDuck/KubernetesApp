@@ -18,11 +18,11 @@ spec:
         - name: postgres-pingpong
           image: postgres
           ports:
-            - name: web
-              containerPort: 5432
+            - containerPort: 5432
           volumeMounts:
             - name: postgres-pingpong-data-storage
               mountPath: /var/lib/postgresql/data
+              subPath: postgres
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
@@ -34,7 +34,6 @@ spec:
         name: postgres-pingpong-data-storage
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
         resources:
           requests:
             storage: 100Mi
@@ -47,7 +46,6 @@ metadata:
 spec:
   ports:
   - port: 5432
-    name: web
   clusterIP: None
   selector:
     app: postgres-pingpong
