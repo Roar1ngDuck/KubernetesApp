@@ -35,6 +35,12 @@ app.MapPost("/todos", async (HttpContext httpContext) =>
 {
     var form = await httpContext.Request.ReadFormAsync();
     var todo = form["todo"].ToString();
+    Console.WriteLine($"Received todo: {todo}");
+    if (todo.Length > 140)
+    {
+        Console.WriteLine($"ERROR: Received todo was too long");
+        return Results.Redirect("/");
+    }
     DatabaseHelper.AddTodo(connectionString, todo);
     return Results.Redirect("/");
 });
