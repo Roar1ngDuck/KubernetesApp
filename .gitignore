@@ -5,3 +5,4 @@ obj
 *.code-workspace
 key.txt
 debug-container.yaml
+deploy.sh
