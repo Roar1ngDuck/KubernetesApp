@@ -20,6 +20,9 @@ DatabaseHelper.EnsureDatabaseExists(masterConnectionString, "pingpongdb");
 
 DatabaseHelper.InitializeDatabase(connectionString);
 
+// Ingress expects 200 OK as health check
+app.MapGet("/", () => { return Results.Ok(); });
+
 app.MapGet("/pingpong", () =>
 {
     int newCount = DatabaseHelper.IncrementPingPongCount(connectionString);

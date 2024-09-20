@@ -4,10 +4,10 @@ metadata:
   namespace: log-namespace
   name: dwk-pingpongapp-svc
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: dwk-pingpongapp
   ports:
-    - port: 80
+    - port: 10002
       protocol: TCP
       targetPort: 9002

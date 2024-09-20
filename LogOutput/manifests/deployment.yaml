@@ -22,14 +22,14 @@ spec:
             name: log-config
       containers:
         - name: dwk-logoutput-writer
-          image: roaringduck/dwk-logoutput-writer
+          image: roaringduck/dwk-logoutput-writer@sha256:277e83cd95edfeb48994606bc1cdae973112f94b49443eaf45efa585321fa7e5
           volumeMounts:
           - name: shared-logoutput
             mountPath: /usr/src/app/files
           - name: log-config
             mountPath: /usr/src/app/config
         - name: dwk-logoutput-reader
-          image: roaringduck/dwk-logoutput-reader
+          image: roaringduck/dwk-logoutput-reader@sha256:cab84d566575fecba0db31a985d3d36b031bbea431fe3bfa9aa94e3d0c0174fc
           volumeMounts:
           - name: shared-logoutput
             mountPath: /usr/src/app/files
