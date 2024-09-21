@@ -7,7 +7,6 @@ resources:
   - manifests/service.yaml
   - manifests/service-backend.yaml
   - manifests/ingress.yaml
-  - manifests/persistentvolume.yaml
   - manifests/persistentvolumeclaim.yaml
   - manifests/deployment.yaml
   - manifests/hourly-article.yaml

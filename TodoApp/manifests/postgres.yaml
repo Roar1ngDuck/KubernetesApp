@@ -23,6 +23,7 @@ spec:
           volumeMounts:
             - name: postgres-todo-data-storage
               mountPath: /var/lib/postgresql/data
+              subPath: postgres
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
@@ -34,7 +35,6 @@ spec:
         name: postgres-todo-data-storage
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
         resources:
           requests:
             storage: 100Mi

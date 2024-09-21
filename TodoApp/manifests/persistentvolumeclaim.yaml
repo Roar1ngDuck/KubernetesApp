@@ -4,9 +4,8 @@ metadata:
   namespace: todo-namespace
   name: todoapp-volume-claim
 spec:
-  storageClassName: todoapp-volume
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 100Mi
