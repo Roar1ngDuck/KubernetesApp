@@ -25,6 +25,9 @@ DatabaseHelper.EnsureDatabaseExists(masterConnectionString, "todosdb");
 
 DatabaseHelper.InitializeDatabase(connectionString);
 
+// Ingress expects 200 OK as health check
+app.MapGet("/", () => { return Results.Ok(); });
+
 app.MapGet("/todos", () =>
 {
     var todos = DatabaseHelper.GetTodos(connectionString);

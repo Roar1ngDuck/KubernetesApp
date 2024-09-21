@@ -6,3 +6,4 @@ obj
 key.txt
 debug-container.yaml
 deploy.sh
+postgres-conf.yaml

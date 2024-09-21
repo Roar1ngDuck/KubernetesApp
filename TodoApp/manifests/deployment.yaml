@@ -19,12 +19,12 @@ spec:
             claimName: todoapp-volume-claim
       containers:
         - name: dwk-todoapp-frontend
-          image: roaringduck/dwk-todoapp-frontend
+          image: FRONTEND-IMAGE
           volumeMounts:
           - name: todoapp-volume
             mountPath: /usr/src/app/files
         - name: dwk-todoapp-backend
-          image: roaringduck/dwk-todoapp-backend
+          image: BACKEND-IMAGE
           volumeMounts:
           - name: todoapp-volume
             mountPath: /usr/src/app/files
