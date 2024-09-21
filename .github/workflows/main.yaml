@@ -65,6 +65,6 @@ jobs:
         run: |-
           kustomize edit set image FRONTEND-IMAGE=gcr.io/$PROJECT_ID/$IMAGE_FRONTEND:$BRANCH-$GITHUB_SHA
           kustomize edit set image BACKEND-IMAGE=gcr.io/$PROJECT_ID/$IMAGE_BACKEND:$BRANCH-$GITHUB_SHA
-          kustomize build . | kubectl apply -f -
+          kustomize build TodoApp/ | kubectl apply -f -
           kubectl rollout status deployment $SERVICE
           kubectl get services -o wide
