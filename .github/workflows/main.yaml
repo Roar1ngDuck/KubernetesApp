@@ -11,7 +11,6 @@ env:
   IMAGE_BACKEND: dwk-todoapp-backend
   SERVICE: dwk-todoapp-dep
   BRANCH: ${{ github.ref_name }}
-  SOPS_KEY: ${{ secrets.SOPS_KEY }}
 
 jobs:
   build-publish-deploy:
@@ -59,7 +58,7 @@ jobs:
           curl -LO https://github.com/getsops/sops/releases/download/v3.9.0/sops-v3.9.0.linux.amd64
           mv sops-v3.9.0.linux.amd64 /usr/local/bin/sops
           chmod +x /usr/local/bin/sops
-          export SOPS_AGE_KEY=$SOPS_KEY
+          export SOPS_AGE_KEY=${{ secrets.SOPS_KEY }}
           sops --decrypt TodoApp/secrets/postgres-conf.enc.yaml > TodoApp/secrets/postgres-conf.yaml
 
       - name: Deploy
