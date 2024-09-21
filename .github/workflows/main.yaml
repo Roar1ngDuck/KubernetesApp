@@ -64,9 +64,14 @@ jobs:
       - name: Deploy
         run: |-
           cd TodoApp
-          kubectl create namespace ${GITHUB_REF#refs/heads/} || true
-          kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
-          kustomize edit set namespace ${GITHUB_REF#refs/heads/}
+          if [ "${GITHUB_REF#refs/heads/}" == "main" ]; then
+            NAMESPACE="default"
+          else
+            NAMESPACE="${GITHUB_REF#refs/heads/}"
+          fi
+          kubectl create namespace $NAMESPACE || true
+          kubectl config set-context --current --namespace=$NAMESPACE
+          kustomize edit set namespace $NAMESPACE
           kustomize edit set image FRONTEND-IMAGE=gcr.io/$PROJECT_ID/$IMAGE_FRONTEND:$BRANCH-$GITHUB_SHA
           kustomize edit set image BACKEND-IMAGE=gcr.io/$PROJECT_ID/$IMAGE_BACKEND:$BRANCH-$GITHUB_SHA
           kustomize build . | kubectl apply -f -
