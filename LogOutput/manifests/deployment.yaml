@@ -28,6 +28,10 @@ spec:
             mountPath: /usr/src/app/files
           - name: log-config
             mountPath: /usr/src/app/config
+          resources:
+            limits:
+              cpu: "25m"
+              memory: "150Mi"
         - name: dwk-logoutput-reader
           image: roaringduck/dwk-logoutput-reader@sha256:cab84d566575fecba0db31a985d3d36b031bbea431fe3bfa9aa94e3d0c0174fc
           volumeMounts:
@@ -41,3 +45,7 @@ spec:
                 configMapKeyRef:
                   name: log-config
                   key: MESSAGE
+          resources:
+            limits:
+              cpu: "25m"
+              memory: "150Mi"
