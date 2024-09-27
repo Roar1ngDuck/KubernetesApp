@@ -38,3 +38,7 @@ spec:
                 configMapKeyRef:
                   name: pingpongapp-config
                   key: POSTGRES_USER
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "100Mi"
