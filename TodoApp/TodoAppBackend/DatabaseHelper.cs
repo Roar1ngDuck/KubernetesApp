@@ -3,6 +3,35 @@ using System;
 
 public static class DatabaseHelper
 {
+    public static void WaitForDatabaseAvailability(string connectionString)
+    {
+        while (true)
+        {
+            if (!IsDatabaseAvailable(connectionString))
+            {
+                Thread.Sleep(5000);
+                continue;
+            }
+
+            return;
+        }
+    }
+
+    public static bool IsDatabaseAvailable(string connectionString)
+    {
+        try
+        {
+            using var conn = new NpgsqlConnection(connectionString);
+            conn.Open();
+            return true;
+        }
+        catch (Exception e)
+        { 
+            Console.WriteLine($"Unable to connect to database. Reason: {e.Message}");
+            return false;
+        }
+    }
+
     public static void EnsureDatabaseExists(string masterConnectionString, string databaseName)
     {
         using var conn = new NpgsqlConnection(masterConnectionString);
