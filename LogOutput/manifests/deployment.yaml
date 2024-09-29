@@ -22,7 +22,7 @@ spec:
             name: log-config
       containers:
         - name: dwk-logoutput-writer
-          image: roaringduck/dwk-logoutput-writer@sha256:277e83cd95edfeb48994606bc1cdae973112f94b49443eaf45efa585321fa7e5
+          image: roaringduck/dwk-logoutput-writer@sha256:92947c05547e97f61b04da1de710f90090a2ae9a42488dfeee4ff4c9e1477da0
           volumeMounts:
           - name: shared-logoutput
             mountPath: /usr/src/app/files
@@ -33,7 +33,7 @@ spec:
               cpu: "25m"
               memory: "150Mi"
         - name: dwk-logoutput-reader
-          image: roaringduck/dwk-logoutput-reader@sha256:cab84d566575fecba0db31a985d3d36b031bbea431fe3bfa9aa94e3d0c0174fc
+          image: roaringduck/dwk-logoutput-reader@sha256:f42223ed1d4d2d812d723f7fa279062c18cc1d63b2f06f0a656b429fe5aae836
           volumeMounts:
           - name: shared-logoutput
             mountPath: /usr/src/app/files
@@ -49,3 +49,9 @@ spec:
             limits:
               cpu: "25m"
               memory: "150Mi"
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+               path: /
+               port: 9001

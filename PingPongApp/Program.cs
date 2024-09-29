@@ -13,15 +13,31 @@ var app = builder.Build();
 var postgresHost = Environment.GetEnvironmentVariable("POSTGRES_HOST");
 var postgresUser = Environment.GetEnvironmentVariable("POSTGRES_USER");
 var postgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+if (string.IsNullOrEmpty(postgresHost) || string.IsNullOrEmpty(postgresUser) || string.IsNullOrEmpty(postgresPassword))
+{
+    throw new Exception("POSTGRES_HOST, POSTGRES_USER, POSTGRES_PASSWORD must be set");
+}
+
 string masterConnectionString = $"Host={postgresHost};Username={postgresUser};Password={postgresPassword};Database=postgres";
 string connectionString = $"Host={postgresHost};Username={postgresUser};Password={postgresPassword};Database=pingpongdb";
 
-DatabaseHelper.EnsureDatabaseExists(masterConnectionString, "pingpongdb");
+_ = Task.Run(() =>
+{
+    DatabaseHelper.WaitForDatabaseAvailability(masterConnectionString);
+    DatabaseHelper.EnsureDatabaseExists(masterConnectionString, "pingpongdb");
+    DatabaseHelper.InitializeDatabase(connectionString);
+});
 
-DatabaseHelper.InitializeDatabase(connectionString);
+// Health check
+app.MapGet("/", () => 
+{ 
+    if (DatabaseHelper.IsConnected)
+    {
+        return Results.Ok("OK");
+    }
 
-// Ingress expects 200 OK as health check
-app.MapGet("/", () => { return Results.Ok(); });
+    return Results.Problem("Database not available");
+});
 
 app.MapGet("/pingpong", () =>
 {

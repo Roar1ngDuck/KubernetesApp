@@ -15,8 +15,19 @@ builder.WebHost.UseKestrel(options =>
 
 var app = builder.Build();
 
-// Ingress expects 200 OK as health check
-app.MapGet("/", () => { return Results.Ok(); });
+// Health check
+app.MapGet("/", () => 
+{ 
+    try
+    {
+        GetPingPongCount();
+        return Results.Ok("OK"); 
+    }
+    catch (Exception e)
+    {
+        return Results.Problem(e.Message);
+    }
+});
 
 app.MapGet("/api/status", () => 
 {
