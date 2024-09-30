@@ -14,8 +14,8 @@ resources:
   - manifests/hourly-article.yaml
 images:
   - name: FRONTEND-IMAGE
-    newName: roaringduck/dwk-todoapp-frontend:v1.8c
+    newName: roaringduck/dwk-todoapp-frontend:v1.9d
   - name: BACKEND-IMAGE
-    newName: roaringduck/dwk-todoapp-backend:v1.8c
+    newName: roaringduck/dwk-todoapp-backend:v1.9d
   - name: PG-BACKUP-IMAGE
     newName: roaringduck/dwk-postgres-backup:v1

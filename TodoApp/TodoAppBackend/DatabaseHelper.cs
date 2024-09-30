@@ -1,15 +1,36 @@
 using Npgsql;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-public static class DatabaseHelper
+namespace TodoAppBackend;
+
+public class DatabaseHelper
 {
-    public static void WaitForDatabaseAvailability(string connectionString)
+    private string _masterConnectionString;
+    private string _connectionString;
+    private string _databaseHost;
+    private string _databaseName;
+    private string _databaseUser;
+    private string _databasePassword;
+
+    public DatabaseHelper(string databaseHost, string databaseName, string databaseUser, string databasePassword)
+    {
+        _databaseHost = databaseHost;
+        _databaseName = databaseName;
+        _databaseUser = databaseUser;
+        _databasePassword = databasePassword;
+        _masterConnectionString = $"Host={_databaseHost};Username={_databaseUser};Password={_databasePassword};Database=postgres";
+        _connectionString = $"Host={_databaseHost};Username={_databaseUser};Password={_databasePassword};Database={_databaseName}";
+    }
+
+    public async Task WaitForDatabaseAvailabilityAsync()
     {
         while (true)
         {
-            if (!IsDatabaseAvailable(connectionString))
+            if (!await IsDatabaseAvailableAsync())
             {
-                Thread.Sleep(5000);
+                await Task.Delay(5000);
                 continue;
             }
 
@@ -17,28 +38,28 @@ public static class DatabaseHelper
         }
     }
 
-    public static bool IsDatabaseAvailable(string connectionString)
+    public async Task<bool> IsDatabaseAvailableAsync()
     {
         try
         {
-            using var conn = new NpgsqlConnection(connectionString);
-            conn.Open();
+            await using var conn = new NpgsqlConnection(_masterConnectionString);
+            await conn.OpenAsync();
             return true;
         }
         catch (Exception e)
-        { 
+        {
             Console.WriteLine($"Unable to connect to database. Reason: {e.Message}");
             return false;
         }
     }
 
-    public static void EnsureDatabaseExists(string masterConnectionString, string databaseName)
+    private async Task EnsureDatabaseExistsAsync()
     {
-        using var conn = new NpgsqlConnection(masterConnectionString);
-        conn.Open();
-        string checkDbQuery = $"SELECT 1 FROM pg_database WHERE datname = '{databaseName}'";
-        using var cmd = new NpgsqlCommand(checkDbQuery, conn);
-        var result = cmd.ExecuteScalar();
+        await using var conn = new NpgsqlConnection(_masterConnectionString);
+        await conn.OpenAsync();
+        string checkDbQuery = $"SELECT 1 FROM pg_database WHERE datname = '{_databaseName}'";
+        await using var cmd = new NpgsqlCommand(checkDbQuery, conn);
+        var result = await cmd.ExecuteScalarAsync();
 
         if (result != null)
         {
@@ -47,49 +68,64 @@ public static class DatabaseHelper
         }
 
         Console.WriteLine("Creating database");
-        string createDbQuery = $"CREATE DATABASE {databaseName}";
-        using var createCmd = new NpgsqlCommand(createDbQuery, conn);
-        createCmd.ExecuteNonQuery();
+        string createDbQuery = $"CREATE DATABASE {_databaseName}";
+        await using var createCmd = new NpgsqlCommand(createDbQuery, conn);
+        await createCmd.ExecuteNonQueryAsync();
     }
 
-    public static void InitializeDatabase(string connectionString)
+    public async Task InitializeDatabaseAsync()
     {
-        using var conn = new NpgsqlConnection(connectionString);
-        conn.Open();
+        await EnsureDatabaseExistsAsync();
+
+        await using var conn = new NpgsqlConnection(_connectionString);
+        await conn.OpenAsync();
         string createTableQuery = @"
             CREATE TABLE IF NOT EXISTS Todos (
                 id SERIAL PRIMARY KEY,
-                todoText TEXT NOT NULL
+                todoText TEXT NOT NULL,
+                done BOOLEAN NOT NULL DEFAULT FALSE
             )";
-        using var cmd = new NpgsqlCommand(createTableQuery, conn);
-        cmd.ExecuteNonQuery();
+        await using var cmd = new NpgsqlCommand(createTableQuery, conn);
+        await cmd.ExecuteNonQueryAsync();
     }
 
-    public static List<string> GetTodos(string connectionString)
+    public async Task<List<Todo>> GetTodosAsync()
     {
-        var todos = new List<string>();
-        using var conn = new NpgsqlConnection(connectionString);
-        conn.Open();
-        string selectTodosQuery = "SELECT todoText FROM Todos";
-        using var cmd = new NpgsqlCommand(selectTodosQuery, conn);
-        using var reader = cmd.ExecuteReader();
+        var todos = new List<Todo>();
+        await using var conn = new NpgsqlConnection(_connectionString);
+        await conn.OpenAsync();
+        string selectTodosQuery = "SELECT id, todoText, done FROM Todos";
+        await using var cmd = new NpgsqlCommand(selectTodosQuery, conn);
+        await using var reader = await cmd.ExecuteReaderAsync();
 
-        while (reader.Read())
+        while (await reader.ReadAsync())
         {
-            todos.Add(reader.GetString(0));
+            var todo = new Todo(reader.GetInt32(0), reader.GetString(1), reader.GetBoolean(2));
+            todos.Add(todo);
         }
 
         return todos;
     }
 
-    public static void AddTodo(string connectionString, string todo)
+    public async Task AddTodoAsync(string todo)
     {
-        using var conn = new NpgsqlConnection(connectionString);
-        conn.Open();
+        await using var conn = new NpgsqlConnection(_connectionString);
+        await conn.OpenAsync();
 
         string insertTodoQuery = "INSERT INTO Todos (todoText) VALUES (@todoText)";
-        using var cmd = new NpgsqlCommand(insertTodoQuery, conn);
+        await using var cmd = new NpgsqlCommand(insertTodoQuery, conn);
         cmd.Parameters.AddWithValue("todoText", todo);
-        cmd.ExecuteNonQuery();
+        await cmd.ExecuteNonQueryAsync();
+    }
+
+    public async Task MarkTodoAsDoneAsync(int id)
+    {
+        await using var conn = new NpgsqlConnection(_connectionString);
+        await conn.OpenAsync();
+
+        string updateTodoQuery = "UPDATE Todos SET done = TRUE WHERE id = @id";
+        await using var cmd = new NpgsqlCommand(updateTodoQuery, conn);
+        cmd.Parameters.AddWithValue("id", id);
+        await cmd.ExecuteNonQueryAsync();
     }
 }

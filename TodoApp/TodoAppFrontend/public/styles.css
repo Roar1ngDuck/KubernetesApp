@@ -46,7 +46,7 @@ body {
     min-width: 0;
 }
 
-button[type="submit"] {
+button {
     padding: 0.5rem 1rem;
     background-color: #6200ee;
     color: #ffffff;
@@ -60,6 +60,11 @@ button[type="submit"]:hover {
     background-color: #3700b3;
 }
 
+#todo-list li .done {
+    text-decoration: line-through;
+    color: #888;
+}
+
 #todo-list {
     list-style: none;
 }
@@ -68,4 +73,6 @@ button[type="submit"]:hover {
     background-color: #333;
     padding: 0.5rem;
     border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
 }

@@ -1,3 +1,5 @@
+using TodoAppBackend;
+
 var builder = WebApplication.CreateBuilder(args);
 
 int portNumber;
@@ -23,20 +25,18 @@ if (string.IsNullOrEmpty(postgresHost) || string.IsNullOrEmpty(postgresUser) || 
 {
     throw new Exception("POSTGRES_HOST, POSTGRES_USER, POSTGRES_PASSWORD, TODOS_DB must be set");
 }
-string masterConnectionString = $"Host={postgresHost};Username={postgresUser};Password={postgresPassword};Database=postgres";
-string connectionString = $"Host={postgresHost};Username={postgresUser};Password={postgresPassword};Database={todosDb}";
+var databaseHelper = new DatabaseHelper(postgresHost, todosDb, postgresUser, postgresPassword);
 
-_ = Task.Run(() =>
+_ = Task.Run(async () =>
 {
-    DatabaseHelper.WaitForDatabaseAvailability(masterConnectionString);
-    DatabaseHelper.EnsureDatabaseExists(masterConnectionString, todosDb);
-    DatabaseHelper.InitializeDatabase(connectionString);
+    await databaseHelper.WaitForDatabaseAvailabilityAsync();
+    await databaseHelper.InitializeDatabaseAsync();
 });
 
 // Health check
-app.MapGet("/", () => 
+app.MapGet("/", async () => 
 { 
-    if (DatabaseHelper.IsDatabaseAvailable(connectionString))
+    if (await databaseHelper.IsDatabaseAvailableAsync())
     {
         return Results.Ok("OK");
     }
@@ -44,9 +44,9 @@ app.MapGet("/", () =>
     return Results.Problem("Database not available");
 });
 
-app.MapGet("/todos", () =>
+app.MapGet("/todos", async () =>
 {
-    var todos = DatabaseHelper.GetTodos(connectionString);
+    var todos = await databaseHelper.GetTodosAsync();
     return Results.Ok(todos);
 });
 
@@ -60,8 +60,14 @@ app.MapPost("/todos", async (HttpContext httpContext) =>
         Console.WriteLine($"ERROR: Received todo was too long");
         return Results.Redirect("/");
     }
-    DatabaseHelper.AddTodo(connectionString, todo);
+    await databaseHelper.AddTodoAsync(todo);
     return Results.Redirect("/");
+});
+
+app.MapPut("/todos/{id}", async (HttpContext httpContext, int id) =>
+{
+    await databaseHelper.MarkTodoAsDoneAsync(id);
+    return Results.Ok();
 });
 
 app.Run();
