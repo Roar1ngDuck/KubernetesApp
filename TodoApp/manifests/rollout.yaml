@@ -1,13 +1,20 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   namespace: todo-namespace
   name: dwk-todoapp-dep
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: dwk-todoapp
+  strategy:
+    canary:
+      steps:
+      - setWeight: 50
+      - analysis:
+          templates:
+          - templateName: cpu-usage
   template:
     metadata:
       labels:

@@ -3,17 +3,19 @@ kind: Kustomization
 resources:
   - secrets/postgres-conf.yaml
   - manifests/postgres.yaml
+  - manifests/postgres-backup.yaml
   - manifests/config.yaml
   - manifests/service.yaml
   - manifests/service-backend.yaml
   - manifests/ingress.yaml
   - manifests/persistentvolumeclaim.yaml
-  - manifests/deployment.yaml
+  - manifests/analysistemplate.yaml
+  - manifests/rollout.yaml
   - manifests/hourly-article.yaml
 images:
   - name: FRONTEND-IMAGE
-    newName: roaringduck/dwk-todoapp-frontend@sha256:ae5f47e21cabb46994ac2046cdf48d8db2ea0445c6fdeeec18adb5c2e1ca1b3f
+    newName: roaringduck/dwk-todoapp-frontend:v1.8c
   - name: BACKEND-IMAGE
-    newName: roaringduck/dwk-todoapp-backend@sha256:3ee5c0da9d1d8957eb450f48c6c6c03cad73a6a2a0a42ee7dfb9c33d95303359
+    newName: roaringduck/dwk-todoapp-backend:v1.8c
   - name: PG-BACKUP-IMAGE
-    newName: roaringduck/dwk-postgres-backup@sha256:5c89d30025e02eece7aeae9e701eaa957e11b13d31cd03888fca4103d29cd50c
+    newName: roaringduck/dwk-postgres-backup:v1
