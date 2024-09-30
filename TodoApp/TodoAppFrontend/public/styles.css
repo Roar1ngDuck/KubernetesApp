@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    margin-bottom: 0.5rem;
 }
 
 body {
@@ -56,7 +55,7 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
+button:hover {
     background-color: #3700b3;
 }
 
@@ -75,4 +74,6 @@ button[type="submit"]:hover {
     border-radius: 0.5rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
 }

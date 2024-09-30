@@ -10,7 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     li.innerHTML = `
                         <span class="${todo.done ? 'done' : ''}">${todo.todoText}</span>
-                        ${!todo.done ? `<button class="mark-done" data-id="${todo.id}">Mark as Done</button>` : ''}
+                        <span>
+                            ${!todo.done ? `<button class="mark-done" data-id="${todo.id}">Mark as Done</button>` : ''}
+                            <button class="delete-todo" data-id="${todo.id}">Delete</button>
+                        </span>
                     `;
 
                     todoList.appendChild(li);
@@ -21,6 +24,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     button.addEventListener('click', function () {
                         const todoId = this.getAttribute('data-id');
                         markTodoAsDone(todoId);
+                    });
+                });
+
+                const deleteButtons = document.querySelectorAll('.delete-todo');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const todoId = this.getAttribute('data-id');
+                        deleteTodo(todoId);
                     });
                 });
             })
@@ -37,6 +48,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         .catch(error => console.error('Error marking todo as done:', error));
+    }
+
+    function deleteTodo(id) {
+        fetch(`/todos/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                fetchTodos();
+            }
+        })
+        .catch(error => console.error('Error deleting todo:', error));
     }
 
     fetchTodos();

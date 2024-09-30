@@ -7,3 +7,4 @@ data:
   POSTGRES_HOST: "postgres-todo-svc"
   POSTGRES_USER: "postgres"
   TODOS_DB: "todosdb"
+  NATS_URL: "my-nats:4222"

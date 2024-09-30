@@ -94,7 +94,7 @@ public class DatabaseHelper
         var todos = new List<Todo>();
         await using var conn = new NpgsqlConnection(_connectionString);
         await conn.OpenAsync();
-        string selectTodosQuery = "SELECT id, todoText, done FROM Todos";
+        string selectTodosQuery = "SELECT id, todoText, done FROM Todos ORDER BY id DESC";
         await using var cmd = new NpgsqlCommand(selectTodosQuery, conn);
         await using var reader = await cmd.ExecuteReaderAsync();
 
@@ -107,24 +107,55 @@ public class DatabaseHelper
         return todos;
     }
 
-    public async Task AddTodoAsync(string todo)
+    public async Task<Todo> GetTodoByIdAsync(int id)
     {
         await using var conn = new NpgsqlConnection(_connectionString);
         await conn.OpenAsync();
-
-        string insertTodoQuery = "INSERT INTO Todos (todoText) VALUES (@todoText)";
-        await using var cmd = new NpgsqlCommand(insertTodoQuery, conn);
-        cmd.Parameters.AddWithValue("todoText", todo);
-        await cmd.ExecuteNonQueryAsync();
+        string selectTodoQuery = "SELECT todoText, done FROM Todos WHERE id = @id";
+        await using var cmd = new NpgsqlCommand(selectTodoQuery, conn);
+        cmd.Parameters.AddWithValue("id", id);
+        await using var reader = await cmd.ExecuteReaderAsync();
+        await reader.ReadAsync();
+        return new Todo(id, reader.GetString(0), reader.GetBoolean(1));
     }
 
-    public async Task MarkTodoAsDoneAsync(int id)
+    public async Task<Todo> AddTodoAsync(string todo)
     {
         await using var conn = new NpgsqlConnection(_connectionString);
         await conn.OpenAsync();
 
-        string updateTodoQuery = "UPDATE Todos SET done = TRUE WHERE id = @id";
+        string insertTodoQuery = "INSERT INTO Todos (todoText) VALUES (@todoText) RETURNING id";
+        await using var cmd = new NpgsqlCommand(insertTodoQuery, conn);
+        cmd.Parameters.AddWithValue("todoText", todo);
+        await using var reader = await cmd.ExecuteReaderAsync();
+
+        await reader.ReadAsync();
+        var id = reader.GetInt32(0);
+        return new Todo(id, todo, false);
+    }
+
+    public async Task<Todo> MarkTodoAsDoneAsync(int id)
+    {
+        await using var conn = new NpgsqlConnection(_connectionString);
+        await conn.OpenAsync();
+
+        string updateTodoQuery = "UPDATE Todos SET done = TRUE WHERE id = @id RETURNING todoText";
         await using var cmd = new NpgsqlCommand(updateTodoQuery, conn);
+        cmd.Parameters.AddWithValue("id", id);
+        await using var reader = await cmd.ExecuteReaderAsync();
+
+        await reader.ReadAsync();
+        var todoText = reader.GetString(0);
+        return new Todo(id, todoText, true);
+    }
+
+    public async Task DeleteTodoAsync(int id)
+    {
+        await using var conn = new NpgsqlConnection(_connectionString);
+        await conn.OpenAsync();
+
+        string deleteTodoQuery = "DELETE FROM Todos WHERE id = @id";
+        await using var cmd = new NpgsqlCommand(deleteTodoQuery, conn);
         cmd.Parameters.AddWithValue("id", id);
         await cmd.ExecuteNonQueryAsync();
     }

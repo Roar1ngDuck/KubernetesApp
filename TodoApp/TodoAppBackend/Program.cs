@@ -1,3 +1,5 @@
+using NATS.Client.Core;
+using System.Text.Json;
 using TodoAppBackend;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,9 +23,10 @@ var postgresHost = Environment.GetEnvironmentVariable("POSTGRES_HOST");
 var postgresUser = Environment.GetEnvironmentVariable("POSTGRES_USER");
 var postgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
 var todosDb = Environment.GetEnvironmentVariable("TODOS_DB");
-if (string.IsNullOrEmpty(postgresHost) || string.IsNullOrEmpty(postgresUser) || string.IsNullOrEmpty(postgresPassword) || string.IsNullOrEmpty(todosDb))
+var natsUrl = Environment.GetEnvironmentVariable("NATS_URL");
+if (string.IsNullOrEmpty(postgresHost) || string.IsNullOrEmpty(postgresUser) || string.IsNullOrEmpty(postgresPassword) || string.IsNullOrEmpty(todosDb) || string.IsNullOrEmpty(natsUrl))
 {
-    throw new Exception("POSTGRES_HOST, POSTGRES_USER, POSTGRES_PASSWORD, TODOS_DB must be set");
+    throw new Exception("POSTGRES_HOST, POSTGRES_USER, POSTGRES_PASSWORD, TODOS_DB, NATS_URL must be set");
 }
 var databaseHelper = new DatabaseHelper(postgresHost, todosDb, postgresUser, postgresPassword);
 
@@ -32,6 +35,9 @@ _ = Task.Run(async () =>
     await databaseHelper.WaitForDatabaseAvailabilityAsync();
     await databaseHelper.InitializeDatabaseAsync();
 });
+
+var opts = new NatsOpts { Url = natsUrl };
+await using var nats = new NatsConnection(opts);
 
 // Health check
 app.MapGet("/", async () => 
@@ -53,20 +59,30 @@ app.MapGet("/todos", async () =>
 app.MapPost("/todos", async (HttpContext httpContext) =>
 {
     var form = await httpContext.Request.ReadFormAsync();
-    var todo = form["todo"].ToString();
-    Console.WriteLine($"Received todo: {todo}");
-    if (todo.Length > 140)
+    var todoText = form["todo"].ToString();
+    Console.WriteLine($"Received todo: {todoText}");
+    if (todoText.Length > 140)
     {
         Console.WriteLine($"ERROR: Received todo was too long");
         return Results.Redirect("/");
     }
-    await databaseHelper.AddTodoAsync(todo);
+    var todo = await databaseHelper.AddTodoAsync(todoText);
+    await nats.PublishAsync("todo.created", JsonSerializer.Serialize(todo));
     return Results.Redirect("/");
 });
 
 app.MapPut("/todos/{id}", async (HttpContext httpContext, int id) =>
 {
-    await databaseHelper.MarkTodoAsDoneAsync(id);
+    var todo = await databaseHelper.MarkTodoAsDoneAsync(id);
+    await nats.PublishAsync("todo.updated", JsonSerializer.Serialize(todo));
+    return Results.Ok();
+});
+
+app.MapDelete("/todos/{id}", async (HttpContext httpContext, int id) =>
+{
+    var todo = await databaseHelper.GetTodoByIdAsync(id);
+    await databaseHelper.DeleteTodoAsync(id);
+    await nats.PublishAsync("todo.deleted", JsonSerializer.Serialize(todo));
     return Results.Ok();
 });
 

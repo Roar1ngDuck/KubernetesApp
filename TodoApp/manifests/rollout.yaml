@@ -4,7 +4,7 @@ metadata:
   namespace: todo-namespace
   name: dwk-todoapp-dep
 spec:
-  replicas: 4
+  replicas: 6
   selector:
     matchLabels:
       app: dwk-todoapp
@@ -60,6 +60,11 @@ spec:
                 configMapKeyRef:
                   name: todoapp-config
                   key: TODOS_DB
+            - name: NATS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: NATS_URL
           resources:
             limits:
               cpu: "100m"
@@ -76,3 +81,20 @@ spec:
             httpGet:
                path: /
                port: 9003
+        - name: dwk-todoapp-broadcaster
+          image: BROADCASTER-IMAGE
+          env:
+            - name: NATS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: NATS_URL
+            - name: DISCORD_WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: discord-webhook-secret
+                  key: DISCORD_WEBHOOK_URL
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "150Mi"

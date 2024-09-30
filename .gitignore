@@ -8,3 +8,4 @@ debug-container.yaml
 deploy.sh
 postgres-conf.yaml
 google-key.json
+discord-webhook.yaml
