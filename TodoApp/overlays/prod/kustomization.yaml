@@ -1,6 +1,18 @@
 resources:
-  - ../../base
-  - postgres-backup.yaml
+- ../../base
+- postgres-backup.yaml
 patches:
-  - path: config.yaml
+- path: config.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 namespace: todoapp-prod
+images:
+- name: BACKEND-IMAGE
+  newName: roaringduck/dwk-todoapp-backend
+  newTag: 3aac6dd48203c3ec3916dd34a2ad798e559fc9c6
+- name: BROADCASTER-IMAGE
+  newName: roaringduck/dwk-todoapp-broadcaster
+  newTag: 3aac6dd48203c3ec3916dd34a2ad798e559fc9c6
+- name: FRONTEND-IMAGE
+  newName: roaringduck/dwk-todoapp-frontend
+  newTag: 3aac6dd48203c3ec3916dd34a2ad798e559fc9c6
