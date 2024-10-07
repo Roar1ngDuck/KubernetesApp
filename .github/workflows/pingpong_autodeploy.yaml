@@ -21,7 +21,7 @@ jobs:
       # tag image with the GitHub SHA to get a unique tag
       - name: Build and publish backend
         run: |-
-          docker build --tag "roaringduck/dwk-pingpongapp:$GITHUB_SHA" .
+          docker build --tag "roaringduck/dwk-pingpongapp:$GITHUB_SHA" ./PingPongApp
           docker push "roaringduck/dwk-pingpongapp:$GITHUB_SHA"
 
       - name: Set up Kustomize
