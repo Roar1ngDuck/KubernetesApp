@@ -94,6 +94,11 @@ spec:
                 secretKeyRef:
                   name: discord-webhook-secret
                   key: DISCORD_WEBHOOK_URL
+            - name: ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: ENVIRONMENT
           resources:
             limits:
               cpu: "100m"

@@ -3,11 +3,22 @@ using NATS.Client.Core;
 using System.Text;
 
 var natsUrl = Environment.GetEnvironmentVariable("NATS_URL");
+
+if (string.IsNullOrEmpty(natsUrl))
+{
+    throw new Exception("NATS_URL must be set");
+}
+
+var env = Environment.GetEnvironmentVariable("ENVIRONMENT");
+env = string.IsNullOrEmpty(env) ? "DEV" : env;
+
+Console.WriteLine($"Environment: {env}");
+
 var discordWebhookUrl = Environment.GetEnvironmentVariable("DISCORD_WEBHOOK_URL");
 
-if (string.IsNullOrEmpty(natsUrl) || string.IsNullOrEmpty(discordWebhookUrl))
+if (string.IsNullOrEmpty(discordWebhookUrl) && env == "PROD")
 {
-    throw new Exception("NATS_URL, DISCORD_WEBHOOK_URL must be set");
+    throw new Exception("DISCORD_WEBHOOK_URL must be set");
 }
 
 var hostname = System.Net.Dns.GetHostName();
@@ -26,6 +37,12 @@ await foreach (var msg in sub.Msgs.ReadAllAsync())
     var formatted = JsonSerializer.Serialize(doc.RootElement, new JsonSerializerOptions { WriteIndented = true });
     Console.WriteLine(msg.Subject);
     Console.WriteLine(formatted);
+
+    if (env != "PROD")
+    {
+        continue;
+    }
+
     formatted = $"```json\n{formatted}```";
 
     var status = msg.Subject switch

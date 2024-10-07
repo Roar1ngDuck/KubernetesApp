@@ -8,3 +8,4 @@ data:
   POSTGRES_USER: "postgres"
   TODOS_DB: "todosdb"
   NATS_URL: "my-nats.default.svc.cluster.local:4222"
+  ENVIRONMENT: "DEV"
