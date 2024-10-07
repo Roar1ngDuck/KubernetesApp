@@ -69,4 +69,4 @@ jobs:
             ./TodoApp/overlays/staging/kustomization.yaml
             ./TodoApp/overlays/prod/kustomization.yaml
           message: New version released ${{ github.sha }}
-          push: origin main --set-upstream
+          push: origin HEAD:refs/heads/${{ github.ref_name }}
