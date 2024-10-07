@@ -61,9 +61,6 @@ jobs:
             exit 0
           fi
 
-      - name: Checkout main branch
-        run: git checkout main
-
       - name: Commit kustomization.yaml changes to GitHub
         uses: EndBug/add-and-commit@v9
         with:
@@ -72,3 +69,4 @@ jobs:
             ./TodoApp/overlays/staging/kustomization.yaml
             ./TodoApp/overlays/prod/kustomization.yaml
           message: New version released ${{ github.sha }}
+          push: origin main --set-upstream
