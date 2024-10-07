@@ -1,4 +1,4 @@
-name: Build and publish TodoApp
+name: Build and publish apps
 
 on:
   push:
@@ -48,7 +48,7 @@ jobs:
             kustomize edit set image FRONTEND-IMAGE=roaringduck/dwk-todoapp-frontend:$GITHUB_SHA
             kustomize edit set image BACKEND-IMAGE=roaringduck/dwk-todoapp-backend:$GITHUB_SHA
             kustomize edit set image BROADCASTER-IMAGE=roaringduck/dwk-todoapp-broadcaster:$GITHUB_SHA
-            cd PingPongApp
+            cd ../../../PingPongApp
             kustomize edit set image IMAGE=roaringduck/dwk-pingpongapp:$GITHUB_SHA
           elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
             echo "Deploying to production..."
