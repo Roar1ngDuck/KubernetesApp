@@ -1,6 +1,6 @@
 resources:
 - ../../base
-
+namePrefix: staging-
 patches:
 - path: config.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
