@@ -1,7 +1,18 @@
 resources:
-  - ../../base
+- ../../base
 
 patches:
-  - path: config.yaml
-
+- path: config.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 namespace: todoapp-staging
+images:
+- name: BACKEND-IMAGE
+  newName: roaringduck/dwk-todoapp-backend
+  newTag: 99abaed3c45dd3bc219ef6f60af3d70d2f071f8a
+- name: BROADCASTER-IMAGE
+  newName: roaringduck/dwk-todoapp-broadcaster
+  newTag: 99abaed3c45dd3bc219ef6f60af3d70d2f071f8a
+- name: FRONTEND-IMAGE
+  newName: roaringduck/dwk-todoapp-frontend
+  newTag: 99abaed3c45dd3bc219ef6f60af3d70d2f071f8a
