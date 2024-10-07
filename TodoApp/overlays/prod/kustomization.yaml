@@ -1,7 +1,6 @@
 resources:
   - ../../base
   - postgres-backup.yaml
-namePrefix: prod-
 patches:
   - path: config.yaml
 namespace: todoapp-prod
