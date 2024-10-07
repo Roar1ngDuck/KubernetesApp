@@ -9,4 +9,4 @@ resources:
 images:
 - name: IMAGE
   newName: roaringduck/dwk-pingpongapp
-  newTag: e5b51f87ae5b318e7b5da080becc389cda964220
+  newTag: 1b2af331999ee2ee6882c7e6144c8710beb105e2
