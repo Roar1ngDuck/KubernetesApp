@@ -1,0 +1,107 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: todo-namespace
+  name: dwk-todoapp-dep
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: dwk-todoapp
+  strategy:
+    canary:
+      steps:
+      - setWeight: 50
+      - analysis:
+          templates:
+          - templateName: cpu-usage
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: dwk-todoapp
+    spec:
+      volumes:
+        - name: todoapp-volume
+          persistentVolumeClaim:
+            claimName: todoapp-volume-claim
+      containers:
+        - name: dwk-todoapp-frontend
+          image: FRONTEND-IMAGE
+          volumeMounts:
+          - name: todoapp-volume
+            mountPath: /usr/src/app/files
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "150Mi"
+        - name: dwk-todoapp-backend
+          image: BACKEND-IMAGE
+          volumeMounts:
+          - name: todoapp-volume
+            mountPath: /usr/src/app/files
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-todo-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: POSTGRES_HOST
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: POSTGRES_USER
+            - name: TODOS_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: TODOS_DB
+            - name: NATS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: NATS_URL
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "150Mi"
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+               path: /
+               port: 9003
+          livenessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            httpGet:
+               path: /
+               port: 9003
+        - name: dwk-todoapp-broadcaster
+          image: BROADCASTER-IMAGE
+          env:
+            - name: NATS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: NATS_URL
+            - name: DISCORD_WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: discord-webhook-secret
+                  key: DISCORD_WEBHOOK_URL
+            - name: ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: ENVIRONMENT
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "150Mi"
