@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: log-namespace
+  name: dwk-pingpongapp-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dwk-pingpongapp
+  template:
+    metadata:
+      labels:
+        app: dwk-pingpongapp
+    spec:
+      volumes:
+        - name: pingpongapp-volume
+          emptyDir: {}
+      containers:
+        - name: dwk-pingpongapp
+          image: roaringduck/dwk-pingpongapp@sha256:7549a42aaabbcad99d5680d2ce5befdc42960178291677d4671f4534d37e1b3d
+          volumeMounts:
+          - name: pingpongapp-volume
+            mountPath: /usr/src/app/files
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-pingpong-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpongapp-config
+                  key: POSTGRES_HOST
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpongapp-config
+                  key: POSTGRES_USER
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "100Mi"

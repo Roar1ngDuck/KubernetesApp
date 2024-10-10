@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - secrets/postgres-conf.yaml
+  - manifests/postgres.yaml
+  - manifests/config.yaml
+  - manifests/service.yaml
+  - manifests/service-backend.yaml
+  - manifests/ingress.yaml
+  - manifests/persistentvolumeclaim.yaml
+  - manifests/deployment.yaml
+  - manifests/hourly-article.yaml
+images:
+  - name: FRONTEND-IMAGE
+    newName: roaringduck/dwk-todoapp-frontend@sha256:ae5f47e21cabb46994ac2046cdf48d8db2ea0445c6fdeeec18adb5c2e1ca1b3f
+  - name: BACKEND-IMAGE
+    newName: roaringduck/dwk-todoapp-backend@sha256:2b9c341fc0f9eb64463d73197bce04297ddebdc8b0013785411bac5395254237
+  - name: PG-BACKUP-IMAGE
+    newName: roaringduck/dwk-postgres-backup@sha256:5c89d30025e02eece7aeae9e701eaa957e11b13d31cd03888fca4103d29cd50c

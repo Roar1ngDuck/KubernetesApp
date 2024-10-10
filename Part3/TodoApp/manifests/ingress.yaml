@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: todo-namespace
+  name: dwk-todoapp-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /todos
+        pathType: Prefix
+        backend:
+          service:
+            name: dwk-todoapp-backend-svc
+            port:
+              number: 10003
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: dwk-todoapp-svc
+            port:
+              number: 10000

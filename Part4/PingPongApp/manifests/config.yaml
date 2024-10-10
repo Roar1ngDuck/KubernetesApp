@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: log-namespace
+  name: pingpongapp-config
+data:
+  POSTGRES_HOST: "postgres-pingpong-svc"
+  POSTGRES_USER: "postgres"

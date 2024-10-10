@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: todo-namespace
+  name: random-wikipedia-todo
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: random-wikipedia-todo
+            image: curlimages/curl:latest
+            command:
+            - /bin/sh
+            - -c
+            - |
+              RANDOM_URL=$(curl -s -I "https://en.wikipedia.org/wiki/Special:Random" | grep -i '^location:' | awk '{print $2}')
+              curl -X POST -d "todo=Read ${RANDOM_URL}" http://dwk-todoapp-backend-svc:10003/todos
+          restartPolicy: OnFailure

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: todo-namespace
+  name: dwk-todoapp-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dwk-todoapp
+  template:
+    metadata:
+      labels:
+        app: dwk-todoapp
+    spec:
+      volumes:
+        - name: todoapp-volume
+          persistentVolumeClaim:
+            claimName: todoapp-volume-claim
+      containers:
+        - name: dwk-todoapp-frontend
+          image: roaringduck/dwk-todoapp-frontend
+          volumeMounts:
+          - name: todoapp-volume
+            mountPath: /usr/src/app/files
+        - name: dwk-todoapp-backend
+          image: roaringduck/dwk-todoapp-backend
+          volumeMounts:
+          - name: todoapp-volume
+            mountPath: /usr/src/app/files
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-todo-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: POSTGRES_HOST
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: POSTGRES_USER

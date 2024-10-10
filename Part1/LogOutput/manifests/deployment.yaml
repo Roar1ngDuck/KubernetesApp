@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dwk-logoutput-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dwk-logoutput
+  template:
+    metadata:
+      labels:
+        app: dwk-logoutput
+    spec:
+      volumes:
+        - name: shared-logoutput
+          persistentVolumeClaim:
+            claimName: logoutput-volume-claim
+      containers:
+        - name: dwk-logoutput-writer
+          image: roaringduck/dwk-logoutput-writer
+          volumeMounts:
+          - name: shared-logoutput
+            mountPath: /usr/src/app/files
+        - name: dwk-logoutput-reader
+          image: roaringduck/dwk-logoutput-reader
+          volumeMounts:
+          - name: shared-logoutput
+            mountPath: /usr/src/app/files

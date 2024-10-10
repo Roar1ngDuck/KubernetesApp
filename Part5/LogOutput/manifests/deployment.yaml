@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: log-namespace
+  name: dwk-logoutput-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dwk-logoutput
+  template:
+    metadata:
+      labels:
+        app: dwk-logoutput
+    spec:
+    spec:
+      volumes:
+        - name: shared-logoutput
+          emptyDir: {}
+        - name: log-config
+          configMap:
+            name: log-config
+      containers:
+        - name: dwk-logoutput-writer
+          image: roaringduck/dwk-logoutput-writer@sha256:92947c05547e97f61b04da1de710f90090a2ae9a42488dfeee4ff4c9e1477da0
+          volumeMounts:
+          - name: shared-logoutput
+            mountPath: /usr/src/app/files
+          - name: log-config
+            mountPath: /usr/src/app/config
+          resources:
+            limits:
+              cpu: "25m"
+              memory: "150Mi"
+        - name: dwk-logoutput-reader
+          image: roaringduck/dwk-logoutput-reader@sha256:f42223ed1d4d2d812d723f7fa279062c18cc1d63b2f06f0a656b429fe5aae836
+          volumeMounts:
+          - name: shared-logoutput
+            mountPath: /usr/src/app/files
+          - name: log-config
+            mountPath: /usr/src/app/config
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-config
+                  key: MESSAGE
+          resources:
+            limits:
+              cpu: "25m"
+              memory: "150Mi"
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+               path: /
+               port: 9001

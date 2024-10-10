@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: log-namespace
+  name: dwk-logoutput-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /api/status
+        pathType: Prefix
+        backend:
+          service:
+            name: dwk-logoutput-svc
+            port:
+              number: 10001

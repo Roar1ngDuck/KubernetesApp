@@ -1,0 +1,64 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup
+  namespace: todo-namespace
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: postgres-backup
+            image: PG-BACKUP-IMAGE
+            env:
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: POSTGRES_HOST
+            - name: PGUSER
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: POSTGRES_USER
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-todo-secret
+                  key: POSTGRES_PASSWORD
+            - name: PGDATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: TODOS_DB
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: "/var/secrets/google/google-key.json"
+            volumeMounts:
+            - name: google-credentials
+              mountPath: /var/secrets/google
+
+            command:
+            - /bin/sh
+            - -c
+            - |
+              gcloud init
+
+              gcloud config set project dwk-gke-436115
+
+              gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+
+              BACKUP_FILE="/tmp/db-backup-$(date +\%Y-\%m-\%dT\%H-\%M-\%S).sql.gz"
+            
+              pg_dump -h $PGHOST -U $PGUSER -d $PGDATABASE | gzip > $BACKUP_FILE
+            
+              gsutil cp $BACKUP_FILE gs://dwk-project-db-backup-bucket/
+            
+              rm $BACKUP_FILE
+
+          restartPolicy: OnFailure
+          volumes:
+          - name: google-credentials
+            secret:
+              secretName: gcs-key-secret
