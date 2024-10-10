@@ -1,0 +1,320 @@
+Script started on 2024-10-10 13:30:53+03:00 [TERM="xterm-256color" TTY="/dev/pts/13" COLUMNS="285" LINES="23"]
+[?2004h]0;niko@DESKTOP-F586MH6: /mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[01;32mniko@DESKTOP-F586MH6[00m:[01;34m/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[00m$ fish
+[?2004lWelcome to fish, the friendly interactive shell
+Type [32mhelp(B[m for instructions on how to use fish
+[?2004h]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps]633;D]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ckubectl apply -k github.com/fluxcd/flagger/k[105C[90mustomize/linkerd[30m(B[m[105C[44D[34mkubectl[30m(B[m [36mapply[30m(B[m [36m-k[30m(B[m [36mgithub.com/fluxcd/flagger/k[90mustomize/linkerd[30m(B[m[105C[36mustomize/linkerd[30m(B[m[121C[121C[121C[121C[121C
+[30m(B[m]633;E;kubectl apply -k github.com/fluxcd/flagger/kustomize/linkerd]633;C[?2004l]0;kubectl apply -k git /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m# Warning: 'bases' is deprecated. Please use 'resources' instead. Run 'kustomize edit fix' to update your Kustomization automatically.
+# Warning: 'patchesJson6902' is deprecated. Please use 'patches' instead. Run 'kustomize edit fix' to update your Kustomization automatically.
+# Warning: 'patchesStrategicMerge' is deprecated. Please use 'patches' instead. Run 'kustomize edit fix' to update your Kustomization automatically.
+namespace/flagger-system created
+customresourcedefinition.apiextensions.k8s.io/alertproviders.flagger.app created
+customresourcedefinition.apiextensions.k8s.io/canaries.flagger.app created
+customresourcedefinition.apiextensions.k8s.io/metrictemplates.flagger.app created
+serviceaccount/flagger created
+clusterrole.rbac.authorization.k8s.io/flagger created
+clusterrolebinding.rbac.authorization.k8s.io/flagger created
+deployment.apps/flagger created
+authorizationpolicy.policy.linkerd.io/prometheus-admin-flagger created
+]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ckubectl -n flagger-system rollout status dep[105C[90mloy/flagger[30m(B[m[105C[44D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mflagger-system[30m(B[m [36mrollout[30m(B[m [36mstatus[30m(B[m [36mdep[90mloy/flagger[30m(B[m[105C[36mloy/flagger[30m(B[m[116C[116C[116C[116C[116C
+[30m(B[m]633;E;kubectl -n flagger-system rollout status deploy/flagger]633;C[?2004l]0;kubectl -n flagger-s /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mdeployment "flagger" successfully rolled out
+]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ckubectl create ns test && [87C\[88C
+[K[A
+[65C  kubectl apply [A
+[81C-f https://run.linkerd.io/flagger.yml[A
+[118C[A[57D[34mkubectl[30m(B[m [36mcreate[30m(B[m [36mns[30m(B[m [36mtest[30m(B[m [96m&&[30m(B[m \
+[67C[34mkubectl[30m(B[m [36mapply[30m(B[m [36m-f[30m(B[m [36mhttps://run.linkerd.io/flagger.yml[30m(B[m[A
+[118C
+[30m(B[m]633;E;kubectl create ns test && \\;  kubectl apply -f https://run.linkerd.io/flagger.yml]633;C[?2004l]0;kubectl create ns te /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mError from server (AlreadyExists): namespaces "test" already exists
+]633;D;1[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m (B[m[31m[[1m[31m1(B[m[31m](B[m(B[m> ]633;B[K[65Ckubectl delete ns test[87C[22D[34mkubectl[30m(B[m [36mdelete[30m(B[m [36mns[30m(B[m [36mtest[30m(B[m[87C
+[30m(B[m]633;E;kubectl delete ns test]633;C[?2004l]0;kubectl delete ns te /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mnamespace "test" deleted
+
+^C]633;D;1[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m (B[m[31m[[1m[31m1(B[m[31m](B[m(B[m> ]633;B[K[65Ckubectl delete ns test[87C[22D[34mkubectl[30m(B[m [36mdelete[30m(B[m [36mns[30m(B[m [36mtest[30m(B[m[87C[22Dkubectl create ns test && \
+[K[69C  kubectl apply -f https://run.linkerd.io/flagger.yml[A
+[122C[A[57D[34mkubectl[30m(B[m [36mcreate[30m(B[m [36mns[30m(B[m [36mtest[30m(B[m [96m&&[30m(B[m \
+[71C[34mkubectl[30m(B[m [36mapply[30m(B[m [36m-f[30m(B[m [36mhttps://run.linkerd.io/flagger.yml[30m(B[m[A
+[122C[A
+[122C
+[30m(B[m]633;E;kubectl create ns test && \\;  kubectl apply -f https://run.linkerd.io/flagger.yml]633;C[?2004l]0;kubectl create ns te /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mError from server (AlreadyExists): object is being deleted: namespaces "test" already exists
+]633;D;1[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m (B[m[31m[[1m[31m1(B[m[31m](B[m(B[m> ]633;B[K[65Ckubectl create ns test && \
+[K[69C  kubectl apply -f https://run.linkerd.io/flagger.yml[A
+[122C[A[57D[34mkubectl[30m(B[m [36mcreate[30m(B[m [36mns[30m(B[m [36mtest[30m(B[m [96m&&[30m(B[m \
+[71C[34mkubectl[30m(B[m [36mapply[30m(B[m [36m-f[30m(B[m [36mhttps://run.linkerd.io/flagger.yml[30m(B[m[A
+[122C[A
+[122C
+[30m(B[m]633;E;kubectl create ns test && \\;  kubectl apply -f https://run.linkerd.io/flagger.yml]633;C[?2004l]0;kubectl create ns te /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mnamespace/test created
+deployment.apps/load created
+configmap/frontend created
+deployment.apps/frontend created
+service/frontend created
+deployment.apps/podinfo created
+service/podinfo created
+]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ckubectl -n test rollout status deploy podinf[105C[90mo[30m(B[m[105C[44D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mrollout[30m(B[m [36mstatus[30m(B[m [36mdeploy[30m(B[m [36mpodinf[90mo[30m(B[m[105C[36mo[30m(B[m[106C[106C[106C
+[30m(B[m]633;E;kubectl -n test rollout status deploy podinfo]633;C[?2004l]0;kubectl -n test roll /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mdeployment "podinfo" successfully rolled out
+]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ckubectl -n test port-forward svc/frontend 80[105C[90m80[30m(B[m[105C[44D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mport-forward[30m(B[m [36msvc/frontend[30m(B[m [36m80[90m80[30m(B[m[105C[36m80[30m(B[m[107C[107C[107C[107C[107C
+[30m(B[m]633;E;kubectl -n test port-forward svc/frontend 8080]633;C[?2004l]0;kubectl -n test port /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mUnable to listen on port 8080: Listeners failed to create with the following errors: [unable to create listener: Error listen tcp4 127.0.0.1:8080: bind: address already in use unable to create listener: Error listen tcp6 [::1]:8080: bind: address already in use]
+error: unable to listen on any of the requested ports: [{8080 8080}]
+]633;D;1[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m (B[m[31m[[1m[31m1(B[m[31m](B[m(B[m> ]633;B[K[65Ckubectl -n test port-forward svc/frontend 8080[111C[46D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mport-forward[30m(B[m [36msvc/frontend[30m(B[m [36m8080[30m(B[m[111C[110C[110C[109C[109C[108C[108C[107C[107C1[36m8080[30m(B[m[108C[4C[90m:8080[30m(B[m[108C[36m18080[90m:8080[30m(B[m[108C[36m08080[30m(B[m[K[109C[36m8080[30m(B[m[K[108C[C[36m8080[30m(B[m[109C[36m08080[30m(B[m[110C[C[36m8080[30m(B[m[111C[36m08080[30m(B[m[112C[36m:8080[30m(B[m[113C[113C[117C[117C[117C
+[30m(B[m]633;E;kubectl -n test port-forward svc/frontend 18080:8080]633;C[?2004l]0;kubectl -n test port /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mForwarding from 127.0.0.1:18080 -> 8080
+Forwarding from [::1]:18080 -> 8080
+Handling connection for 18080
+Handling connection for 18080
+^C]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ck[62C[90mubectl -n test port-forward svc/frontend 18080:8080[30m(B[m[62C[91mk[90mubectl -n test port-forward svc/frontend 18080:8080[30m(B[m[62C[91mu[90mbectl -n test port-forward svc/frontend 18080:8080[30m(B[m[63C[91mb[90mectl -n test port-forward svc/frontend 18080:8080[30m(B[m[64C[91me[90mctl -n test port-forward svc/frontend 18080:8080[30m(B[m[65C[91mc[90mtl -n test port-forward svc/frontend 18080:8080[30m(B[m[66C[91mt[90ml -n test port-forward svc/frontend 18080:8080[30m(B[m[67C[91ml[90m -n test port-forward svc/frontend 18080:8080[30m(B[m[68C[34mkubectl[90m -n test port-forward svc/frontend 18080:8080[30m(B[m[68C[34m [90m-n test port-forward svc/frontend 18080:8080[30m(B[m[69C [90m-n test port-forward svc/frontend 18080:8080[30m(B[m[69Ca[K[70C[90mpply -k github.com/fluxcd/flagger/kustomize/linkerd[30m(B[m[70C[36ma[90mpply -k github.com/fluxcd/flagger/kustomize/linkerd[30m(B[m[70C[36mp[90mply -k github.com/fluxcd/flagger/kustomize/linkerd[30m(B[m[71C[36mp[90mly -k github.com/fluxcd/flagger/kustomize/linkerd[30m(B[m[72C[36ml[90my -k github.com/fluxcd/flagger/kustomize/linkerd[30m(B[m[73C[36my[90m -k github.com/fluxcd/flagger/kustomize/linkerd[30m(B[m[74C[36m [90m-k github.com/fluxcd/flagger/kustomize/linkerd[30m(B[m[75C [90m-k github.com/fluxcd/flagger/kustomize/linkerd[30m(B[m[75Cf[K[76C[36m[4mf[30m(B[m[76C[90mlagger.yaml [30m(B[m[76C[36m[4ml[90m[24magger.yaml [30m(B[m[77C[36m[4ma[90m[24mgger.yaml [30m(B[m[78C[36m[4mg[90m[24mger.yaml [30m(B[m[79C[36m[4mg[90m[24mer.yaml [30m(B[m[80C[36m[4me[90m[24mr.yaml [30m(B[m[81C[36m[4mr[90m[24m.yaml [30m(B[m[82C[36m[4m.[90m[24myaml [30m(B[m[83C[36m[4my[90m[24maml [30m(B[m[84C[36m[4ma[90m[24mml [30m(B[m[85C[36m[4mm[90m[24ml [30m(B[m[86C[36m[4ml[90m[24m [30m(B[m[87C[K[87C
+[30m(B[m]633;E;kubectl apply flagger.yaml]633;C[?2004l]0;kubectl apply flagge /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[merror: Unexpected args: [flagger.yaml]
+See 'kubectl apply -h' for help and examples
+]633;D;1[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m (B[m[31m[[1m[31m1(B[m[31m](B[m(B[m> ]633;B[K[65Ckubectl apply flagger.yaml[91C[26D[34mkubectl[30m(B[m [36mapply[30m(B[m [36m[4mflagger.yaml[30m(B[m[91C[90C[90C[89C[89C[88C[88C[87C[87C[86C[86C[85C[85C[84C[84C[83C[83C[82C[82C[81C[81C[80C[80C[79C[79Cf[36m[4mflagger.yaml[30m(B[m[80C[36mfflagger.yaml[30m(B[m[80C[36mlagger.yaml[30m(B[m[K[79C[36m[4mflagger.yaml[30m(B[m[79C-[36m[4mflagger.yaml[30m(B[m[80C[36m-flagger.yaml[30m(B[m[80C[C[36mflagger.yaml[30m(B[m[81C[36m flagger.yaml[30m(B[m[82C[82C [36m[4mflagger.yaml[30m(B[m[82C[94C
+[30m(B[m]633;E;kubectl apply -f flagger.yaml]633;C[?2004l]0;kubectl apply -f fla /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mcanary.flagger.app/podinfo created
+metrictemplate.flagger.app/success-rate created
+]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ckubectl -n test get ev --watch[91C[91C[30D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mget[30m(B[m [36mev[30m(B[m [36m--watch[30m(B[m[91C[91C[91C[91C
+[30m(B[m]633;E;kubectl -n test get ev --watch]633;C[?2004l]0;kubectl -n test get  /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m[33;1mWarning:[0m short name "ev" could also match lower priority resource events.events.k8s.io
+LAST SEEN   TYPE      REASON                  OBJECT                                  MESSAGE
+2s          Normal    IssuedLeafCertificate   serviceaccount/default                  (combined from similar events): issued certificate for default.test.serviceaccount.identity.linkerd.cluster.local until 2024-10-11 10:34:34 +0000 UTC: 44afedf1dc52befbacbf786f8e52f861b462e7a3de851b950c2291b83be64c8a
+85s         Normal    Scheduled               pod/frontend-8448776595-hshhg           Successfully assigned test/frontend-8448776595-hshhg to k3d-k3s-default-server-0
+85s         Normal    Pulled                  pod/frontend-8448776595-hshhg           Container image "cr.l5d.io/linkerd/proxy-init:v2.4.1" already present on machine
+85s         Normal    Created                 pod/frontend-8448776595-hshhg           Created container linkerd-init
+85s         Normal    Started                 pod/frontend-8448776595-hshhg           Started container linkerd-init
+84s         Normal    Pulled                  pod/frontend-8448776595-hshhg           Container image "cr.l5d.io/linkerd/proxy:edge-24.10.2" already present on machine
+84s         Normal    Created                 pod/frontend-8448776595-hshhg           Created container linkerd-proxy
+84s         Normal    Started                 pod/frontend-8448776595-hshhg           Started container linkerd-proxy
+84s         Normal    Pulling                 pod/frontend-8448776595-hshhg           Pulling image "nginx:alpine"
+78s         Normal    Pulled                  pod/frontend-8448776595-hshhg           Successfully pulled image "nginx:alpine" in 5.562s (5.562s including waiting). Image size: 20506631 bytes.
+78s         Normal    Created                 pod/frontend-8448776595-hshhg           Created container nginx
+78s         Normal    Started                 pod/frontend-8448776595-hshhg           Started container nginx
+85s         Normal    SuccessfulCreate        replicaset/frontend-8448776595          Created pod: frontend-8448776595-hshhg
+86s         Normal    ScalingReplicaSet       deployment/frontend                     Scaled up replica set frontend-8448776595 to 1
+86s         Normal    Injected                deployment/frontend                     Linkerd sidecar proxy injected
+85s         Normal    Scheduled               pod/load-56fdffb685-hwjcg               Successfully assigned test/load-56fdffb685-hwjcg to k3d-k3s-default-agent-1
+85s         Normal    Pulled                  pod/load-56fdffb685-hwjcg               Container image "cr.l5d.io/linkerd/proxy-init:v2.4.1" already present on machine
+85s         Normal    Created                 pod/load-56fdffb685-hwjcg               Created container linkerd-init
+85s         Normal    Started                 pod/load-56fdffb685-hwjcg               Started container linkerd-init
+85s         Normal    Pulled                  pod/load-56fdffb685-hwjcg               Container image "cr.l5d.io/linkerd/proxy:edge-24.10.2" already present on machine
+85s         Normal    Created                 pod/load-56fdffb685-hwjcg               Created container linkerd-proxy
+85s         Normal    Started                 pod/load-56fdffb685-hwjcg               Started container linkerd-proxy
+85s         Normal    Pulling                 pod/load-56fdffb685-hwjcg               Pulling image "buoyantio/slow_cooker:1.2.0"
+81s         Normal    Pulled                  pod/load-56fdffb685-hwjcg               Successfully pulled image "buoyantio/slow_cooker:1.2.0" in 3.371s (3.371s including waiting). Image size: 6189996 bytes.
+81s         Normal    Created                 pod/load-56fdffb685-hwjcg               Created container slow-cooker
+81s         Normal    Started                 pod/load-56fdffb685-hwjcg               Started container slow-cooker
+85s         Normal    SuccessfulCreate        replicaset/load-56fdffb685              Created pod: load-56fdffb685-hwjcg
+86s         Normal    ScalingReplicaSet       deployment/load                         Scaled up replica set load-56fdffb685 to 1
+86s         Normal    Injected                deployment/load                         Linkerd sidecar proxy injected
+85s         Normal    Scheduled               pod/podinfo-5dbf7bb9c9-hpw2j            Successfully assigned test/podinfo-5dbf7bb9c9-hpw2j to k3d-k3s-default-agent-0
+85s         Normal    Pulled                  pod/podinfo-5dbf7bb9c9-hpw2j            Container image "cr.l5d.io/linkerd/proxy-init:v2.4.1" already present on machine
+85s         Normal    Created                 pod/podinfo-5dbf7bb9c9-hpw2j            Created container linkerd-init
+85s         Normal    Started                 pod/podinfo-5dbf7bb9c9-hpw2j            Started container linkerd-init
+85s         Normal    Pulled                  pod/podinfo-5dbf7bb9c9-hpw2j            Container image "cr.l5d.io/linkerd/proxy:edge-24.10.2" already present on machine
+85s         Normal    Created                 pod/podinfo-5dbf7bb9c9-hpw2j            Created container linkerd-proxy
+85s         Normal    Started                 pod/podinfo-5dbf7bb9c9-hpw2j            Started container linkerd-proxy
+85s         Normal    Pulling                 pod/podinfo-5dbf7bb9c9-hpw2j            Pulling image "quay.io/stefanprodan/podinfo:1.7.0"
+81s         Normal    Pulled                  pod/podinfo-5dbf7bb9c9-hpw2j            Successfully pulled image "quay.io/stefanprodan/podinfo:1.7.0" in 3.089s (3.089s including waiting). Image size: 17043307 bytes.
+81s         Normal    Created                 pod/podinfo-5dbf7bb9c9-hpw2j            Created container podinfod
+81s         Normal    Started                 pod/podinfo-5dbf7bb9c9-hpw2j            Started container podinfod
+85s         Normal    SuccessfulCreate        replicaset/podinfo-5dbf7bb9c9           Created pod: podinfo-5dbf7bb9c9-hpw2j
+3s          Normal    Scheduled               pod/podinfo-primary-57897cbf4f-v8cpp    Successfully assigned test/podinfo-primary-57897cbf4f-v8cpp to k3d-k3s-default-agent-1
+3s          Normal    Pulled                  pod/podinfo-primary-57897cbf4f-v8cpp    Container image "cr.l5d.io/linkerd/proxy-init:v2.4.1" already present on machine
+3s          Normal    Created                 pod/podinfo-primary-57897cbf4f-v8cpp    Created container linkerd-init
+3s          Normal    Started                 pod/podinfo-primary-57897cbf4f-v8cpp    Started container linkerd-init
+3s          Normal    Pulled                  pod/podinfo-primary-57897cbf4f-v8cpp    Container image "cr.l5d.io/linkerd/proxy:edge-24.10.2" already present on machine
+3s          Normal    Created                 pod/podinfo-primary-57897cbf4f-v8cpp    Created container linkerd-proxy
+2s          Normal    Started                 pod/podinfo-primary-57897cbf4f-v8cpp    Started container linkerd-proxy
+2s          Normal    Pulled                  pod/podinfo-primary-57897cbf4f-v8cpp    Container image "quay.io/stefanprodan/podinfo:1.7.0" already present on machine
+2s          Normal    Created                 pod/podinfo-primary-57897cbf4f-v8cpp    Created container podinfod
+2s          Normal    Started                 pod/podinfo-primary-57897cbf4f-v8cpp    Started container podinfod
+4s          Normal    SuccessfulCreate        replicaset/podinfo-primary-57897cbf4f   Created pod: podinfo-primary-57897cbf4f-v8cpp
+4s          Normal    ScalingReplicaSet       deployment/podinfo-primary              Scaled up replica set podinfo-primary-57897cbf4f to 1
+4s          Normal    Injected                deployment/podinfo-primary              Linkerd sidecar proxy injected
+85s         Normal    ScalingReplicaSet       deployment/podinfo                      Scaled up replica set podinfo-5dbf7bb9c9 to 1
+85s         Normal    Injected                deployment/podinfo                      Linkerd sidecar proxy injected
+4s          Normal    Synced                  canary/podinfo                          all the metrics providers are available!
+4s          Warning   Synced                  canary/podinfo                          podinfo-primary.test not ready: waiting for rollout to finish: observed deployment generation less than desired generation
+^C]633;D;1[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m (B[m[31m[[1m[31m1(B[m[31m](B[m(B[m> ]633;B[K[65Ckubectl -n test set image deployment/podinfo[109C[44D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mset[30m(B[m [36mimage[30m(B[m [36mdeployment/podinfo[30m(B[m[109C[36m [30m(B[m[110C[45Dkubectl -n test set image deployment/podinfo \[111C
+[K[A
+[69C  podinfod=quay.io/stefanprodan/podinfo:1.7.1[A
+[114C[A[49D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mset[30m(B[m [36mimage[30m(B[m [36mdeployment/podinfo[30m(B[m \
+[71C[36mpodinfod=quay.io/stefanprodan/podinfo:1.7.1[30m(B[m[A
+[114C
+[30m(B[m]633;E;kubectl -n test set image deployment/podinfo \\;  podinfod=quay.io/stefanprodan/podinfo:1.7.1]633;C[?2004l]0;kubectl -n test set  /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mdeployment.apps/podinfo image updated
+]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ckubectl -n test get ev --watch[91C[91C[30D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mget[30m(B[m [36mev[30m(B[m [36m--watch[30m(B[m[91C[91C[91C[91C
+[30m(B[m]633;E;kubectl -n test get ev --watch]633;C[?2004l]0;kubectl -n test get  /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m[33;1mWarning:[0m short name "ev" could also match lower priority resource events.events.k8s.io
+LAST SEEN   TYPE      REASON                  OBJECT                                  MESSAGE
+58s         Normal    IssuedLeafCertificate   serviceaccount/default                  (combined from similar events): issued certificate for default.test.serviceaccount.identity.linkerd.cluster.local until 2024-10-11 10:34:34 +0000 UTC: 44afedf1dc52befbacbf786f8e52f861b462e7a3de851b950c2291b83be64c8a
+2m21s       Normal    Scheduled               pod/frontend-8448776595-hshhg           Successfully assigned test/frontend-8448776595-hshhg to k3d-k3s-default-server-0
+2m21s       Normal    Pulled                  pod/frontend-8448776595-hshhg           Container image "cr.l5d.io/linkerd/proxy-init:v2.4.1" already present on machine
+2m21s       Normal    Created                 pod/frontend-8448776595-hshhg           Created container linkerd-init
+2m21s       Normal    Started                 pod/frontend-8448776595-hshhg           Started container linkerd-init
+2m20s       Normal    Pulled                  pod/frontend-8448776595-hshhg           Container image "cr.l5d.io/linkerd/proxy:edge-24.10.2" already present on machine
+2m20s       Normal    Created                 pod/frontend-8448776595-hshhg           Created container linkerd-proxy
+2m20s       Normal    Started                 pod/frontend-8448776595-hshhg           Started container linkerd-proxy
+2m20s       Normal    Pulling                 pod/frontend-8448776595-hshhg           Pulling image "nginx:alpine"
+2m14s       Normal    Pulled                  pod/frontend-8448776595-hshhg           Successfully pulled image "nginx:alpine" in 5.562s (5.562s including waiting). Image size: 20506631 bytes.
+2m14s       Normal    Created                 pod/frontend-8448776595-hshhg           Created container nginx
+2m14s       Normal    Started                 pod/frontend-8448776595-hshhg           Started container nginx
+2m21s       Normal    SuccessfulCreate        replicaset/frontend-8448776595          Created pod: frontend-8448776595-hshhg
+2m22s       Normal    ScalingReplicaSet       deployment/frontend                     Scaled up replica set frontend-8448776595 to 1
+2m22s       Normal    Injected                deployment/frontend                     Linkerd sidecar proxy injected
+2m21s       Normal    Scheduled               pod/load-56fdffb685-hwjcg               Successfully assigned test/load-56fdffb685-hwjcg to k3d-k3s-default-agent-1
+2m21s       Normal    Pulled                  pod/load-56fdffb685-hwjcg               Container image "cr.l5d.io/linkerd/proxy-init:v2.4.1" already present on machine
+2m21s       Normal    Created                 pod/load-56fdffb685-hwjcg               Created container linkerd-init
+2m21s       Normal    Started                 pod/load-56fdffb685-hwjcg               Started container linkerd-init
+2m21s       Normal    Pulled                  pod/load-56fdffb685-hwjcg               Container image "cr.l5d.io/linkerd/proxy:edge-24.10.2" already present on machine
+2m21s       Normal    Created                 pod/load-56fdffb685-hwjcg               Created container linkerd-proxy
+2m21s       Normal    Started                 pod/load-56fdffb685-hwjcg               Started container linkerd-proxy
+2m21s       Normal    Pulling                 pod/load-56fdffb685-hwjcg               Pulling image "buoyantio/slow_cooker:1.2.0"
+2m17s       Normal    Pulled                  pod/load-56fdffb685-hwjcg               Successfully pulled image "buoyantio/slow_cooker:1.2.0" in 3.371s (3.371s including waiting). Image size: 6189996 bytes.
+2m17s       Normal    Created                 pod/load-56fdffb685-hwjcg               Created container slow-cooker
+2m17s       Normal    Started                 pod/load-56fdffb685-hwjcg               Started container slow-cooker
+2m21s       Normal    SuccessfulCreate        replicaset/load-56fdffb685              Created pod: load-56fdffb685-hwjcg
+2m22s       Normal    ScalingReplicaSet       deployment/load                         Scaled up replica set load-56fdffb685 to 1
+2m22s       Normal    Injected                deployment/load                         Linkerd sidecar proxy injected
+2m21s       Normal    Scheduled               pod/podinfo-5dbf7bb9c9-hpw2j            Successfully assigned test/podinfo-5dbf7bb9c9-hpw2j to k3d-k3s-default-agent-0
+2m21s       Normal    Pulled                  pod/podinfo-5dbf7bb9c9-hpw2j            Container image "cr.l5d.io/linkerd/proxy-init:v2.4.1" already present on machine
+2m21s       Normal    Created                 pod/podinfo-5dbf7bb9c9-hpw2j            Created container linkerd-init
+2m21s       Normal    Started                 pod/podinfo-5dbf7bb9c9-hpw2j            Started container linkerd-init
+2m21s       Normal    Pulled                  pod/podinfo-5dbf7bb9c9-hpw2j            Container image "cr.l5d.io/linkerd/proxy:edge-24.10.2" already present on machine
+2m21s       Normal    Created                 pod/podinfo-5dbf7bb9c9-hpw2j            Created container linkerd-proxy
+2m21s       Normal    Started                 pod/podinfo-5dbf7bb9c9-hpw2j            Started container linkerd-proxy
+2m21s       Normal    Pulling                 pod/podinfo-5dbf7bb9c9-hpw2j            Pulling image "quay.io/stefanprodan/podinfo:1.7.0"
+2m17s       Normal    Pulled                  pod/podinfo-5dbf7bb9c9-hpw2j            Successfully pulled image "quay.io/stefanprodan/podinfo:1.7.0" in 3.089s (3.089s including waiting). Image size: 17043307 bytes.
+2m17s       Normal    Created                 pod/podinfo-5dbf7bb9c9-hpw2j            Created container podinfod
+2m17s       Normal    Started                 pod/podinfo-5dbf7bb9c9-hpw2j            Started container podinfod
+40s         Normal    Killing                 pod/podinfo-5dbf7bb9c9-hpw2j            Stopping container linkerd-proxy
+40s         Normal    Killing                 pod/podinfo-5dbf7bb9c9-hpw2j            Stopping container podinfod
+2m21s       Normal    SuccessfulCreate        replicaset/podinfo-5dbf7bb9c9           Created pod: podinfo-5dbf7bb9c9-hpw2j
+40s         Normal    SuccessfulDelete        replicaset/podinfo-5dbf7bb9c9           Deleted pod: podinfo-5dbf7bb9c9-hpw2j
+59s         Normal    Scheduled               pod/podinfo-primary-57897cbf4f-v8cpp    Successfully assigned test/podinfo-primary-57897cbf4f-v8cpp to k3d-k3s-default-agent-1
+59s         Normal    Pulled                  pod/podinfo-primary-57897cbf4f-v8cpp    Container image "cr.l5d.io/linkerd/proxy-init:v2.4.1" already present on machine
+59s         Normal    Created                 pod/podinfo-primary-57897cbf4f-v8cpp    Created container linkerd-init
+59s         Normal    Started                 pod/podinfo-primary-57897cbf4f-v8cpp    Started container linkerd-init
+59s         Normal    Pulled                  pod/podinfo-primary-57897cbf4f-v8cpp    Container image "cr.l5d.io/linkerd/proxy:edge-24.10.2" already present on machine
+59s         Normal    Created                 pod/podinfo-primary-57897cbf4f-v8cpp    Created container linkerd-proxy
+58s         Normal    Started                 pod/podinfo-primary-57897cbf4f-v8cpp    Started container linkerd-proxy
+58s         Normal    Pulled                  pod/podinfo-primary-57897cbf4f-v8cpp    Container image "quay.io/stefanprodan/podinfo:1.7.0" already present on machine
+58s         Normal    Created                 pod/podinfo-primary-57897cbf4f-v8cpp    Created container podinfod
+58s         Normal    Started                 pod/podinfo-primary-57897cbf4f-v8cpp    Started container podinfod
+60s         Normal    SuccessfulCreate        replicaset/podinfo-primary-57897cbf4f   Created pod: podinfo-primary-57897cbf4f-v8cpp
+60s         Normal    ScalingReplicaSet       deployment/podinfo-primary              Scaled up replica set podinfo-primary-57897cbf4f to 1
+60s         Normal    Injected                deployment/podinfo-primary              Linkerd sidecar proxy injected
+2m21s       Normal    ScalingReplicaSet       deployment/podinfo                      Scaled up replica set podinfo-5dbf7bb9c9 to 1
+2m21s       Normal    Injected                deployment/podinfo                      Linkerd sidecar proxy injected
+30s         Normal    Synced                  canary/podinfo                          all the metrics providers are available!
+60s         Warning   Synced                  canary/podinfo                          podinfo-primary.test not ready: waiting for rollout to finish: observed deployment generation less than desired generation
+50s         Warning   Synced                  canary/podinfo                          podinfo-primary.test not ready: waiting for rollout to finish: 0 of 1 (readyThreshold 100%) updated replicas are available
+40s         Normal    ScalingReplicaSet       deployment/podinfo                      Scaled down replica set podinfo-5dbf7bb9c9 to 0 from 1
+40s         Warning   Synced                  canary/podinfo                          HTTPRoute .test update error: resource name may not be empty while reconciling
+30s         Normal    Synced                  canary/podinfo                          Initialization done! podinfo.test
+^C]633;D;1[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m (B[m[31m[[1m[31m1(B[m[31m](B[m(B[m> ]633;B[K[65Cwatch kubectl -n test get canary[97C[97C[32D[34mwatch[30m(B[m [36mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mget[30m(B[m [36mcanary[30m(B[m[97C[97C[97C[97C
+[30m(B[m]633;E;watch kubectl -n test get canary]633;C[?2004l]0;watch kubectl -n tes /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m[?1049h[22;0;0t[1;23r(B[m[4l[?7h[H[2JEvery 2.0s: kubectl -n test get canary[1;245HDESKTOP-F586MH6: Thu Oct 10 13:35:36 2024[3;1HNAME[11GSTATUS[3;25HWEIGHT   LASTTRANSITIONTIME[4dpodinfo   Progressing   20[34G2024-10-10T10:35:32Z[23;285H[1;280H8[23;285H[1;279H40[23;285H[1;280H2[23;285H[1;280H4[4;25H3[4;51H4[23;285H[1;280H6[23;285H[1;280H8[23;285H[1;279H50[23;285H[1;280H2[4;25H4[4;51H5[23;285H[1;280H5[23;285H[1;280H7[23;285H[1;280H9[23;285H[1;277H6:01[23;285H[23;1H[?1049l[23;0;0t[?1l>]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ckubectl -n test get httproute.gateway.networ[105C[90mking.k8s.io podinfo -o yaml[30m(B[m[105C[44D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mget[30m(B[m [36mhttproute.gateway.networ[90mking.k8s.io podinfo -o yaml[30m(B[m[105C[36mking.k8s.io podinfo -o yaml[30m(B[m[132C[132C[16D [36mpodinfo[30m(B[m [36m-o[30m(B[m [36myaml[30m(B[m[132C[132C[132C[132C
+[30m(B[m]633;E;kubectl -n test get httproute.gateway.networking.k8s.io podinfo -o yaml]633;C[?2004l]0;kubectl -n test get  /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mapiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  annotations:
+    helm.toolkit.fluxcd.io/driftDetection: disabled
+    kustomize.toolkit.fluxcd.io/reconcile: disabled
+  creationTimestamp: "2024-10-10T10:34:32Z"
+  generation: 6
+  name: podinfo
+  namespace: test
+  ownerReferences:
+  - apiVersion: flagger.app/v1beta1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Canary
+    name: podinfo
+    uid: 1b1c89ea-a252-4aa2-b100-605d40c3991c
+  resourceVersion: "388760"
+  uid: 81edb262-cda7-4f6e-9e93-ee152d9655d0
+spec:
+  parentRefs:
+  - group: core
+    kind: Service
+    name: podinfo
+    namespace: test
+    port: 9898
+  rules:
+  - backendRefs:
+    - group: ""
+      kind: Service
+      name: podinfo-primary
+      port: 9898
+      weight: 50
+    - group: ""
+      kind: Service
+      name: podinfo-canary
+      port: 9898
+      weight: 50
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+status:
+  parents:
+  - conditions:
+    - lastTransitionTime: "2024-10-10T10:34:32Z"
+      message: ""
+      reason: Accepted
+      status: "True"
+      type: Accepted
+    - lastTransitionTime: "2024-10-10T10:34:32Z"
+      message: ""
+      reason: ResolvedRefs
+      status: "True"
+      type: ResolvedRefs
+    controllerName: linkerd.io/policy-controller
+    parentRef:
+      group: core
+      kind: Service
+      name: podinfo
+      namespace: test
+      port: 9898
+]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Cwatch linkerd viz -n test stat deploy --from[105C[90m deploy/load[30m(B[m[105C deploy/load[117C[117C[56D[34mwatch[30m(B[m [36mlinkerd[30m(B[m [36mviz[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mstat[30m(B[m [36mdeploy[30m(B[m [36m--from[30m(B[m [36mdeploy/load[30m(B[m[117C[117C[117C[117C
+[30m(B[m]633;E;watch linkerd viz -n test stat deploy --from deploy/load]633;C[?2004l]0;watch linkerd viz -n /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m[?1049h[22;0;0t[1;23r(B[m[4l[?7h[H[2JEvery 2.0s: linkerd viz -n test stat deploy --from deploy/load[1;245HDESKTOP-F586MH6: Thu Oct 10 13:36:29 2024[3;1HNAME[3;19HMESHED   SUCCESS[41GRPS   LATENCY_P50   LATENCY_P95   LATENCY_P99   TCP_CONN[4dpodinfo[4;22H1/1   100.00%   4.0rps[4;55H1ms[4;69H1ms[4;83H1ms[4;96H1[5dpodinfo-primary[22G1/1   100.00%   5.8rps[5;55H1ms[5;69H1ms[5;83H1ms[5;96H1[23;285H[1;279H31[4;40H1[23;285H[1;280H3[4;40H2[23;285H[1;280H5[4;40H9[5;38H4[23;285H[1;280H8[4;38H5.1[23;285H[23;1H[?1049l[23;0;0t[?1l>]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Cwatch linkerd viz -n test stat deploy --from deploy/load[117C[56D[34mwatch[30m(B[m [36mlinkerd[30m(B[m [36mviz[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mstat[30m(B[m [36mdeploy[30m(B[m [36m--from[30m(B[m [36mdeploy/load[30m(B[m[117C[56Dkubectl -n test get httproute.gateway.networking.k8s.io podinfo -o yaml[132C[71D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mget[30m(B[m [36mhttproute.gateway.networking.k8s.io[30m(B[m [36mpodinfo[30m(B[m [36m-o[30m(B[m [36myaml[30m(B[m[132C[71Dwatch kubectl -n test get canary[K[93C[32D[34mwatch[30m(B[m [36mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mget[30m(B[m [36mcanary[30m(B[m[93C[93C
+[30m(B[m]633;E;watch kubectl -n test get canary]633;C[?2004l]0;watch kubectl -n tes /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m[?1049h[22;0;0t[1;23r(B[m[4l[?7h[H[2JEvery 2.0s: kubectl -n test get canary[1;245HDESKTOP-F586MH6: Thu Oct 10 13:36:45 2024[3;1HNAME[11GSTATUS[3;25HWEIGHT   LASTTRANSITIONTIME[4dpodinfo   Progressing   90[34G2024-10-10T10:36:42Z[23;285H[1;280H7[23;285H[1;280H9[23;285H[23;1H[?1049l[23;0;0t[?1l>]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Cwatch kubectl -n test get canary[93C[32D[34mwatch[30m(B[m [36mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mget[30m(B[m [36mcanary[30m(B[m[93C[32Dwatch linkerd viz -n test stat deploy --from deploy/load[117C[56D[34mwatch[30m(B[m [36mlinkerd[30m(B[m [36mviz[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mstat[30m(B[m [36mdeploy[30m(B[m [36m--from[30m(B[m [36mdeploy/load[30m(B[m[117C[56Dkubectl -n test get httproute.gateway.networking.k8s.io podinfo -o yaml[132C[71D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mget[30m(B[m [36mhttproute.gateway.networking.k8s.io[30m(B[m [36mpodinfo[30m(B[m [36m-o[30m(B[m [36myaml[30m(B[m[132C[71Dkubectl -n test get ev --watch[K[91C[30D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mget[30m(B[m [36mev[30m(B[m [36m--watch[30m(B[m[91C[30Dkubectl -n test set image deployment/podinfo \
+[K[65C  podinfod=quay.io/stefanprodan/podinfo:1.7.1[A
+[110C[A[49D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mset[30m(B[m [36mimage[30m(B[m [36mdeployment/podinfo[30m(B[m \
+[67C[36mpodinfod=quay.io/stefanprodan/podinfo:1.7.1[30m(B[m[A
+[110C[A[49Dkubectl apply -f flagger.yaml[J[90C[29D[34mkubectl[30m(B[m [36mapply[30m(B[m [36m-f[30m(B[m [36m[4mflagger.yaml[30m(B[m[90C[29Dkubectl apply flagger.yaml[K[87C[26D[34mkubectl[30m(B[m [36mapply[30m(B[m [36m[4mflagger.yaml[30m(B[m[87C[26Dkubectl -n test port-forward svc/frontend 18080:8080[113C[52D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mport-forward[30m(B[m [36msvc/frontend[30m(B[m [36m18080:8080[30m(B[m[113C[52Dkubectl -n test port-forward svc/frontend 8080[K[107C[46D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mport-forward[30m(B[m [36msvc/frontend[30m(B[m [36m8080[30m(B[m[107C[46Dkubectl -n test port-forward svc/frontend 18080:8080[113C[52D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mport-forward[30m(B[m [36msvc/frontend[30m(B[m [36m18080:8080[30m(B[m[113C[113C
+[30m(B[m]633;E;kubectl -n test port-forward svc/frontend 18080:8080]633;C[?2004l]0;kubectl -n test port /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mForwarding from 127.0.0.1:18080 -> 8080
+Forwarding from [::1]:18080 -> 8080
+Handling connection for 18080
+Handling connection for 18080
+Handling connection for 18080
+^C]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ckubectl -n test set image deployment/podinfo[105C[44D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mset[30m(B[m [36mimage[30m(B[m [36mdeployment/podinfo[30m(B[m[105C[36m [30m(B[m[106C[45Dkubectl -n test set image deployment/podinfo \[107C
+[K[A
+[65C  podinfod=quay.io/stefanprodan/podinfo:1.7.1[A
+[110C[A[49D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mset[30m(B[m [36mimage[30m(B[m [36mdeployment/podinfo[30m(B[m \
+[67C[36mpodinfod=quay.io/stefanprodan/podinfo:1.7.1[30m(B[m[A
+[110C[K[A
+[109C[36m0[30m(B[m[A
+[110C
+[30m(B[m]633;E;kubectl -n test set image deployment/podinfo \\;  podinfod=quay.io/stefanprodan/podinfo:1.7.0]633;C[?2004l]0;kubectl -n test set  /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mdeployment.apps/podinfo image updated
+]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ckubectl -n test set image deployment/podinfo \
+[K[65C  podinfod=quay.io/stefanprodan/podinfo:1.7.0[A
+[110C[A[49D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mset[30m(B[m [36mimage[30m(B[m [36mdeployment/podinfo[30m(B[m \
+[67C[36mpodinfod=quay.io/stefanprodan/podinfo:1.7.0[30m(B[m[A
+[110C[A[49Dkubectl -n test port-forward svc/frontend 18080:8080[J[113C[52D[34mkubectl[30m(B[m [36m-n[30m(B[m [36mtest[30m(B[m [36mport-forward[30m(B[m [36msvc/frontend[30m(B[m [36m18080:8080[30m(B[m[113C[113C
+[30m(B[m]633;E;kubectl -n test port-forward svc/frontend 18080:8080]633;C[?2004l]0;kubectl -n test port /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[mForwarding from 127.0.0.1:18080 -> 8080
+Forwarding from [::1]:18080 -> 8080
+Handling connection for 18080
+Handling connection for 18080
+^C]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ckubectl delete -k github.com/fluxcd/flagger/[105C[44D[34mkubectl[30m(B[m [36mdelete[30m(B[m [36m-k[30m(B[m [36mgithub.com/fluxcd/flagger/[30m(B[m[105C[36mkustomize/linkerd && [30m(B[m[126C[65Dkubectl delete -k github.com/fluxcd/flagger/kustomize/linkerd && \[127C
+[K[A
+[65C  kubectl delete ns test[A
+[89C[A[28D[34mkubectl[30m(B[m [36mdelete[30m(B[m [36m-k[30m(B[m [36mgithub.com/fluxcd/flagger/kustomize/linkerd[30m(B[m [96m&&[30m(B[m \
+[67C[34mkubectl[30m(B[m [36mdelete[30m(B[m [36mns[30m(B[m [36mtest[30m(B[m[A
+[89C
+[30m(B[m]633;E;kubectl delete -k github.com/fluxcd/flagger/kustomize/linkerd && \\;  kubectl delete ns test]633;C[?2004l]0;kubectl delete -k gi /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m# Warning: 'bases' is deprecated. Please use 'resources' instead. Run 'kustomize edit fix' to update your Kustomization automatically.
+# Warning: 'patchesJson6902' is deprecated. Please use 'patches' instead. Run 'kustomize edit fix' to update your Kustomization automatically.
+# Warning: 'patchesStrategicMerge' is deprecated. Please use 'patches' instead. Run 'kustomize edit fix' to update your Kustomization automatically.
+namespace "flagger-system" deleted
+customresourcedefinition.apiextensions.k8s.io "alertproviders.flagger.app" deleted
+customresourcedefinition.apiextensions.k8s.io "canaries.flagger.app" deleted
+customresourcedefinition.apiextensions.k8s.io "metrictemplates.flagger.app" deleted
+serviceaccount "flagger" deleted
+clusterrole.rbac.authorization.k8s.io "flagger" deleted
+clusterrolebinding.rbac.authorization.k8s.io "flagger" deleted
+deployment.apps "flagger" deleted
+authorizationpolicy.policy.linkerd.io "prometheus-admin-flagger" deleted
+namespace "test" deleted
+]633;D;0[2m⏎(B[m                                                                                                                                                                                                                                                                                            ⏎ [K]633;P;Cwd=/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[?2004h]0;/m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;A[92mniko(B[m@(B[mDESKTOP-F586MH6(B[m [32m/m/c/U/n/s/r/U/KubernetesDevOps(B[m (main)(B[m> ]633;B[K[61Ce[62C[90mxit[30m(B[m[62C[91me[90mxit[30m(B[m[62C[91mx[90mit[30m(B[m[63C[34mex[90mit[30m(B[m[63C[34mi[90mt[30m(B[m[64C[91mexi[90mt[30m(B[m[64C[91mt[30m(B[m[65C[65C[34mexit[30m(B[m[65C[65C
+[30m(B[m]633;E;exit]633;C[?2004l]0;exit /m/c/U/n/s/r/U/KubernetesDevOps[30m(B[m]633;D;0[30m(B[m[?2004l[?2004h]0;niko@DESKTOP-F586MH6: /mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[01;32mniko@DESKTOP-F586MH6[00m:[01;34m/mnt/c/Users/nikos/source/repos/University/KubernetesDevOps[00m$ exit
+[?2004lexit
+
+Script done on 2024-10-10 13:39:20+03:00 [COMMAND_EXIT_CODE="0"]
