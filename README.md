@@ -30,3 +30,12 @@
 # TodoApp Logs
 
 ![Logs](/TodoApp/logs.png)
+
+---
+
+# Why Rancher is better than OpenShift
+- **Easy Setup**: Rancher is easier and quicker to install compared to OpenShift.
+- **More Flexibility**: Rancher works on any operating system and supports multiple clouds. OpenShift is more locked into Red Hat and CoreOS.
+- **Cheaper**: Rancher is open-source with no upfront costs, while OpenShift requires a subscription.
+- **No Vendor Lock-in**: Rancher doesn’t lock you into any vendor, while OpenShift ties you to Red Hat.
+- **User-Friendly**: Rancher’s UI is simpler, while OpenShift can be complicated.
