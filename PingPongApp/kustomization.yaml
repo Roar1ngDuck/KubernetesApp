@@ -1,11 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+- secrets/postgres-conf.yaml
 - manifests/config.yaml
 - manifests/postgres.yaml
-- manifests/service.yaml
-- manifests/ingress.yaml
-- manifests/deployment.yaml
+- manifests/knative-service.yaml
 images:
 - name: IMAGE
   newName: roaringduck/dwk-pingpongapp
