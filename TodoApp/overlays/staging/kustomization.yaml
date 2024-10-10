@@ -8,10 +8,10 @@ namespace: todoapp-staging
 images:
 - name: BACKEND-IMAGE
   newName: roaringduck/dwk-todoapp-backend
-  newTag: 03a6b7ed6484b16ea82fca4c6e0a99d43b8614d4
+  newTag: 4dae3668aacc6cd7a033d694333c6f4c475700ae
 - name: BROADCASTER-IMAGE
   newName: roaringduck/dwk-todoapp-broadcaster
-  newTag: 03a6b7ed6484b16ea82fca4c6e0a99d43b8614d4
+  newTag: 4dae3668aacc6cd7a033d694333c6f4c475700ae
 - name: FRONTEND-IMAGE
   newName: roaringduck/dwk-todoapp-frontend
-  newTag: 03a6b7ed6484b16ea82fca4c6e0a99d43b8614d4
+  newTag: 4dae3668aacc6cd7a033d694333c6f4c475700ae
